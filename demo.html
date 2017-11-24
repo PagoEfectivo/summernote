@@ -13,7 +13,7 @@
 <script type="text/javascript" src="http://dev.2b.pagoEfectivo.pe/JScripts/jsGenerales.js?v=201404251012"></script>
 <script src="http://dev.2b.pagoEfectivo.pe/App_Themes/SPE/js/funciones.js?v=201404251012" type="text/javascript"></script>
 </head>
-    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css" />
+    <!-- <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css" /> -->
     <link rel="stylesheet" href="../dist/summernote.css">
     <title>summernote</title>
   
@@ -34,87 +34,7 @@
     </script>
 <body>
 
-
-    <script type="text/javascript">
-        function isPostBack() { //function to check if page is a postback-ed one
-            return $('#_ispostback').val() == 'True';
-        }
-        $('#errores').css('display', 'none');
-        function alertDiv(mensaje) {
-            if (mensaje != "") {
-                //$('#errores').css('display', 'block');
-                $('#errores').show('slow');
-                $('#errores').text(mensaje);
-            }
-        }
-    </script>
-    <script type="text/javascript" language="javascript">
-        function pageLoad() {
-            if (!Sys.WebForms.PageRequestManager.getInstance().get_isInAsyncPostBack()) {
-                Sys.WebForms.PageRequestManager.getInstance().add_endRequest(AjaxEnd);
-                Sys.WebForms.PageRequestManager.getInstance().add_initializeRequest(AjaxBegin);
-            }
-        }
-        function AjaxEnd(sender, args) {
-            if ($('.pagerStyle>td>table>tbody>tr>td:eq(0)').length > 0)
-                if ($('.pagerStyle>td>table>tbody>tr>td:eq(0)').text() != 'Página :')
-                    $('.pagerStyle>td>table>tbody>tr>td:eq(0)').before('<td>P&aacute;gina :</td>');
-            $(".divLoadingMensaje").hide('fast');
-            $('.divLoading').hide('fold');
-        }
-        function AjaxBegin(sender, args) {
-            $(".divLoadingMensaje").show('fast');
-            $('.divLoading').show('blind');
-            $('#errores').css('display', 'none');
-        }
-        function maxLen(text, maxLen) {
-            return (text.value.length > (maxLen - 1)) ? true : false;
-        }
-    </script>
-
-    <input type="hidden" id="_ispostback" value="False" />
-    <form name="aspnetForm" method="post" action="ADEmail.aspx" onsubmit="javascript:return WebForm_OnSubmit();" id="aspnetForm">
 <div>
-<input type="hidden" name="__EVENTTARGET" id="__EVENTTARGET" value="" />
-<input type="hidden" name="__EVENTARGUMENT" id="__EVENTARGUMENT" value="" />
-<input type="hidden" name="__LASTFOCUS" id="__LASTFOCUS" value="" />
-</div>
-
-<script type="text/javascript">
-//<![CDATA[
-var theForm = document.forms['aspnetForm'];
-if (!theForm) {
-    theForm = document.aspnetForm;
-}
-function __doPostBack(eventTarget, eventArgument) {
-    if (!theForm.onsubmit || (theForm.onsubmit() != false)) {
-        theForm.__EVENTTARGET.value = eventTarget;
-        theForm.__EVENTARGUMENT.value = eventArgument;
-        theForm.submit();
-    }
-}
-//]]>
-</script>
-
-
-//<![CDATA[
-if (typeof(Sys) === 'undefined') throw new Error('ASP.NET Ajax client-side framework failed to load.');
-//]]>
-</script>
-
-<script type="text/javascript">
-//<![CDATA[
-function WebForm_OnSubmit() {
-if (typeof(ValidatorOnSubmit) == "function" && ValidatorOnSubmit() == false) return false;
-return true;
-}
-//]]>
-</script>
-
-<div>
-
-<input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="BD9F32A1" />
-<input type="hidden" name="__VIEWSTATEENCRYPTED" id="__VIEWSTATEENCRYPTED" value="" />
 </div>
     <div id="container">
         <div id="trucont">
@@ -162,32 +82,6 @@ return true;
                     </div>
                     <div style="clear: both">
                     </div>
-    <script type="text/javascript">
-        function hideModalPopUp() {
-            $("#ctl00_ContentPlaceHolder1_pnlNuevoParametro").hide();
-            return;
-        }
-        function loadEditor(id, idbutton) {
-            if ($('#' + id).length === 0) {
-                return;
-            }
-
-            deleteEditor(id);
-            CKEDITOR.replace(id, { fullPage: true });
-
-            CKEDITOR.instances[id].on('blur', function () {
-                CKEDITOR.instances[id].updateElement();
-            });
-        }
-
-        function deleteEditor(id) {
-            var instance = CKEDITOR.instances[id];
-            if (instance) {
-                CKEDITOR.remove(instance);
-            }
-        }
-    </script>
-
     <h2>Actualizar Plantilla</h2>
     <div class="conten_pasos3" style="min-height: 300px">
         <h4> Datos del Servicio</h4>
@@ -513,7 +407,6 @@ return true;
 			<option value="40">Celular</option>
 			<option value="41">DatoAdicional</option>
 			<option value="42">Direccion Usuario</option>
-
 		</select>
                             <li class="t1"><span class="color">>></span> C&oacute;digo:</li>
                             <li class="t2">
@@ -548,7 +441,6 @@ return true;
                         <input type="submit" name="ctl00$ContentPlaceHolder1$btnCancelar" value="Cancelar" onclick="hideModalPopUp();" id="ctl00_ContentPlaceHolder1_btnCancelar" class="input_azul4" />
                     </li>
                 </ul>
-            
 	</div>
         
 </div>
