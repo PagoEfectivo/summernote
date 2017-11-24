@@ -70,13 +70,13 @@
     "karma-typescript": "^3.0.7",
     "karma-typescript-es6-transform": "^1.0.2",
     "load-grunt-tasks": "3.5.2",
-    "nightwatch": "^0.9.16",
-    "serve-static": "^1.13.1",
     "mocha": "^4.0.1",
+    "nightwatch": "^0.9.16",
     "phantomjs-prebuilt": "^2.1.15",
     "rollup": "^0.50.0",
     "rollup-plugin-eslint": "^4.0.0",
     "rollup-plugin-typescript2": "^0.7.0",
+    "serve-static": "^1.13.1",
     "typescript": "^2.5.3"
   }
 }

@@ -72,7 +72,7 @@ $.summernote = $.extend($.summernote, {
       ['color', ['color']],
       ['para', ['ul', 'ol', 'paragraph']],
       ['table', ['table']],
-      ['insert', ['link', 'picture', 'video']],
+      ['insert', ['link', 'picture']],
       ['view', ['fullscreen', 'codeview', 'help']]
     ],
 
@@ -273,8 +273,7 @@ $.summernote = $.extend($.summernote, {
       'trash': 'note-icon-trash',
       'underline': 'note-icon-underline',
       'undo': 'note-icon-undo',
-      'unorderedlist': 'note-icon-unorderedlist',
-      'video': 'note-icon-video'
+      'unorderedlist': 'note-icon-unorderedlist'
     }
   }
 });

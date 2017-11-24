@@ -1,0 +1,676 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1. Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head id="ctl00_Head1"><meta http-equiv="Content-type" content="text/html;charset=UTF-8" /><meta name="google-site-verification" content="qo76WvfbpyJZaf5qMX8ykY1Ou4P1P_Iruuc0I1rj9jk" />
+<title> PagoEfectivo </title>
+<link rel="shortcut icon" href="../favicon.ico" />
+<link href="http://dev.2b.pagoEfectivo.pe/App_Themes/SPE/css/reset.css?v=201404251012" rel="stylesheet" type="text/css" />
+<link href="http://dev.2b.pagoEfectivo.pe/App_Themes/SPE/css/estilo.css?v=201404251012" rel="stylesheet" type="text/css" />
+<!--[if lte IE 7]>
+<link href="../App_Themes/SPE/css/ie7.css" rel="stylesheet" type="text/css" />
+<![endif]-->
+<link href="http://dev.2b.pagoEfectivo.pe/App_Themes/SPE/css/fixEstilo.css?v=201404251012" rel="stylesheet" type="text/css" />
+<script src="http://dev.2b.pagoEfectivo.pe/App_Themes/SPE/js/jquery-1.6.1.min.js?v=201404251012" type="text/javascript"></script>    
+<script type="text/javascript" src="http://dev.2b.pagoEfectivo.pe/JScripts/jsGenerales.js?v=201404251012"></script>
+<script src="http://dev.2b.pagoEfectivo.pe/App_Themes/SPE/js/funciones.js?v=201404251012" type="text/javascript"></script>
+</head>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css" />
+    <link rel="stylesheet" href="../dist/summernote.css">
+    <title>summernote</title>
+  
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script> 
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script>
+    <script type="text/javascript" src="../dist/summernote.js"></script>
+    <script src="lang/summernote-es-ES.js"></script>
+  
+    <script type="text/javascript">
+      $(document).ready(function() {
+        $('.summernote').summernote({
+          height: 500,
+          lang: 'es-ES',
+          placeholder: 'Hello World',
+          tabsize: 2
+        });
+      });
+    </script>
+<body>
+
+
+    <script type="text/javascript">
+        function isPostBack() { //function to check if page is a postback-ed one
+            return $('#_ispostback').val() == 'True';
+        }
+        $('#errores').css('display', 'none');
+        function alertDiv(mensaje) {
+            if (mensaje != "") {
+                //$('#errores').css('display', 'block');
+                $('#errores').show('slow');
+                $('#errores').text(mensaje);
+            }
+        }
+    </script>
+    <script type="text/javascript" language="javascript">
+        function pageLoad() {
+            if (!Sys.WebForms.PageRequestManager.getInstance().get_isInAsyncPostBack()) {
+                Sys.WebForms.PageRequestManager.getInstance().add_endRequest(AjaxEnd);
+                Sys.WebForms.PageRequestManager.getInstance().add_initializeRequest(AjaxBegin);
+            }
+        }
+        function AjaxEnd(sender, args) {
+            if ($('.pagerStyle>td>table>tbody>tr>td:eq(0)').length > 0)
+                if ($('.pagerStyle>td>table>tbody>tr>td:eq(0)').text() != 'Página :')
+                    $('.pagerStyle>td>table>tbody>tr>td:eq(0)').before('<td>P&aacute;gina :</td>');
+            $(".divLoadingMensaje").hide('fast');
+            $('.divLoading').hide('fold');
+        }
+        function AjaxBegin(sender, args) {
+            $(".divLoadingMensaje").show('fast');
+            $('.divLoading').show('blind');
+            $('#errores').css('display', 'none');
+        }
+        function maxLen(text, maxLen) {
+            return (text.value.length > (maxLen - 1)) ? true : false;
+        }
+    </script>
+
+    <input type="hidden" id="_ispostback" value="False" />
+    <form name="aspnetForm" method="post" action="ADEmail.aspx" onsubmit="javascript:return WebForm_OnSubmit();" id="aspnetForm">
+<div>
+<input type="hidden" name="__EVENTTARGET" id="__EVENTTARGET" value="" />
+<input type="hidden" name="__EVENTARGUMENT" id="__EVENTARGUMENT" value="" />
+<input type="hidden" name="__LASTFOCUS" id="__LASTFOCUS" value="" />
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+var theForm = document.forms['aspnetForm'];
+if (!theForm) {
+    theForm = document.aspnetForm;
+}
+function __doPostBack(eventTarget, eventArgument) {
+    if (!theForm.onsubmit || (theForm.onsubmit() != false)) {
+        theForm.__EVENTTARGET.value = eventTarget;
+        theForm.__EVENTARGUMENT.value = eventArgument;
+        theForm.submit();
+    }
+}
+//]]>
+</script>
+
+
+//<![CDATA[
+if (typeof(Sys) === 'undefined') throw new Error('ASP.NET Ajax client-side framework failed to load.');
+//]]>
+</script>
+
+<script type="text/javascript">
+//<![CDATA[
+function WebForm_OnSubmit() {
+if (typeof(ValidatorOnSubmit) == "function" && ValidatorOnSubmit() == false) return false;
+return true;
+}
+//]]>
+</script>
+
+<div>
+
+<input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="BD9F32A1" />
+<input type="hidden" name="__VIEWSTATEENCRYPTED" id="__VIEWSTATEENCRYPTED" value="" />
+</div>
+    <div id="container">
+        <div id="trucont">
+            <div id="menu">
+                <h1>
+                    <a href="../default.aspx">PagoEfectivo</a></h1>
+                <ul id="menu_principal"><li><img src="http://dev.2b.pagoEfectivo.pe/App_Themes/SPE/img/atras.png" alt="" class="element_atr" style="display:hidden" ></img><p class="contenedor_menu"><a class="cambio" href="" onclick="return false;"> Principal - Tesoreria</a><span class="cambio">Mostrar</span></p><ul class="submenu"><li class="has_submen"><p class="noactiva"><span class="lista_it">>></span> <a class="cambioHijo" href="" onclick="return false;"> Depositos Bancarios</a></p><ul class="subsubmenu"><li><a href="http://dev.2b.pagoefectivo.pe/JPR/CODepo.aspx"><span class="lista_it">- </span>  Consultar Deposito</a></li><li><a href="http://dev.2b.pagoefectivo.pe/JPR/COFactu.aspx"><span class="lista_it">- </span>  Consultar Factura</a></li></ul></li></ul></li><li><img src="http://dev.2b.pagoEfectivo.pe/App_Themes/SPE/img/atras.png" alt="" class="element_atr" style="display:hidden" ></img><p class="contenedor_menu"><a href="http://dev.2b.pagoefectivo.pe/ADM/PgPrl.aspx"> Principal - Administrador</a><span class="cambio">Mostrar</span></p><ul class="submenu"><li class="has_submen"><p class="noactiva"><span class="lista_it">>></span> <a class="cambioHijo" href="" onclick="return false;"> Cliente</a></p><ul class="subsubmenu"><li><a href="http://dev.2b.pagoefectivo.pe/ADM/ADClint.aspx"><span class="lista_it">- </span>  Registrar</a></li><li><a href="http://dev.2b.pagoefectivo.pe/ADM/COClint.aspx"><span class="lista_it">- </span>  Consultar</a></li></ul></li><li class="has_submen"><p class="noactiva"><span class="lista_it">>></span> <a class="cambioHijo" href="" onclick="return false;"> Agente</a></p><ul class="subsubmenu"><li><a href="http://dev.2b.pagoefectivo.pe/ADM/ADAgen.aspx"><span class="lista_it">- </span>  Registrar</a></li><li><a href="http://dev.2b.pagoefectivo.pe/ADM/COAgen.aspx"><span class="lista_it">- </span>  Consultar</a></li></ul></li><li class="has_submen"><p class="noactiva"><span class="lista_it">>></span> <a class="cambioHijo" href="" onclick="return false;"> Agente</a></p><ul class="subsubmenu"><li><a href="http://dev.2b.pagoefectivo.pe/ADM/ADAgen.aspx"><span class="lista_it">- </span>  Registrar</a></li><li><a href="http://dev.2b.pagoefectivo.pe/ADM/COAgen.aspx"><span class="lista_it">- </span>  Consultar</a></li></ul></li><li class="has_submen"><p class="noactiva"><span class="lista_it">>></span> <a class="cambioHijo" href="" onclick="return false;"> Agencia Recaudadora</a></p><ul class="subsubmenu"><li><a href="http://dev.2b.pagoefectivo.pe/ADM/ADAgRe.aspx"><span class="lista_it">- </span>  Registrar</a></li><li><a href="http://dev.2b.pagoefectivo.pe/ADM/COAgRe.aspx"><span class="lista_it">- </span>  Consultar</a></li></ul></li><li class="has_submen"><p class="noactiva"><span class="lista_it">>></span> <a class="cambioHijo" href="" onclick="return false;"> Agencia Recaudadora</a></p><ul class="subsubmenu"><li><a href="http://dev.2b.pagoefectivo.pe/ADM/ADAgRe.aspx"><span class="lista_it">- </span>  Registrar</a></li><li><a href="http://dev.2b.pagoefectivo.pe/ADM/COAgRe.aspx"><span class="lista_it">- </span>  Consultar</a></li></ul></li><li class="has_submen"><p class="noactiva"><span class="lista_it">>></span> <a class="cambioHijo" href="" onclick="return false;"> Empresa Contratante</a></p><ul class="subsubmenu"><li><a href="http://dev.2b.pagoefectivo.pe/ADM/ADEmCo.aspx"><span class="lista_it">- </span>  Registrar</a></li><li><a href="http://dev.2b.pagoefectivo.pe/ADM/COEmCo.aspx"><span class="lista_it">- </span>  Consultar</a></li><li><a href="http://dev.2b.pagoefectivo.pe/ADM/ADCuEmp.aspx"><span class="lista_it">- </span>  Reg. Cuenta</a></li><li><a href="http://dev.2b.pagoefectivo.pe/ADM/COCuEmp.aspx"><span class="lista_it">- </span>  Cons. Cuenta</a></li></ul></li><li class="has_submen"><p class="noactiva"><span class="lista_it">>></span> <a class="cambioHijo" href="" onclick="return false;"> Representante</a></p><ul class="subsubmenu"><li><a href="http://dev.2b.pagoefectivo.pe/ADM/ADRepr.aspx"><span class="lista_it">- </span>  Registrar</a></li><li><a href="http://dev.2b.pagoefectivo.pe/ADM/CORepr.aspx"><span class="lista_it">- </span>  Consultar</a></li></ul></li><li class="has_submen"><p class="noactiva"><span class="lista_it">>></span> <a class="cambioHijo" href="" onclick="return false;"> Servicio</a></p><ul class="subsubmenu"><li><a href="http://dev.2b.pagoefectivo.pe/ADM/ADServ.aspx"><span class="lista_it">- </span>  Registrar</a></li><li><a href="http://dev.2b.pagoefectivo.pe/ADM/COServ.aspx"><span class="lista_it">- </span>  Consultar</a></li><li><a href="http://dev.2b.pagoefectivo.pe/ADM/ADServConfig.aspx"><span class="lista_it">- </span>  Config. XML Contrato...</a></li><li><a href="http://dev.2b.pagoefectivo.pe/ADM/ADCont.aspx"><span class="lista_it">- </span>  Actualizar Contrato XML</a></li><li><a href="http://dev.2b.pagoefectivo.pe/ADM/ADEmail.aspx"><span class="lista_it">- </span>  Actualizar Plantilla</a></li></ul></li><li class="has_submen"><p class="noactiva"><span class="lista_it">>></span> <a class="cambioHijo" href="" onclick="return false;"> Jefe de Producto</a></p><ul class="subsubmenu"><li><a href="http://dev.2b.pagoefectivo.pe/ADM/ADJePro.aspx"><span class="lista_it">- </span>  Registrar</a></li><li><a href="http://dev.2b.pagoefectivo.pe/ADM/COJePro.aspx"><span class="lista_it">- </span>  Consultar</a></li></ul></li><li class="has_submen"><p class="noactiva"><span class="lista_it">>></span> <a class="cambioHijo" href="" onclick="return false;"> Generales</a></p><ul class="subsubmenu"><li><a href="http://dev.2b.pagoefectivo.pe/ADM/COArGe.aspx"><span class="lista_it">- </span>  Consultar Archivos G...</a></li><li><a href="http://dev.2b.pagoefectivo.pe/ADM/PRDesUs.aspx"><span class="lista_it">- </span>  Desbloquear Usuario</a></li><li><a href="http://dev.2b.pagoefectivo.pe/SEG/SegConUsuario.aspx"><span class="lista_it">- </span>  Consultar Usuario</a></li><li><a href="http://dev.2b.pagoefectivo.pe/SEG/SegMantUsuario.aspx"><span class="lista_it">- </span>  Registrar Usuario</a></li><li><a href="http://dev.2b.pagoefectivo.pe/SEG/SegMantRol.aspx"><span class="lista_it">- </span>  Mantener Roles</a></li><li><a href="http://dev.2b.pagoefectivo.pe/SEG/SegConPagina.aspx"><span class="lista_it">- </span>  Consultar Páginas</a></li></ul></li><li class="has_submen"><p class="noactiva"><span class="lista_it">>></span> <a class="cambioHijo" href="" onclick="return false;"> Depositos Bancarios</a></p><ul class="subsubmenu"><li><a href="http://dev.2b.pagoefectivo.pe/ADM/AdDepo.aspx"><span class="lista_it">- </span>  Registrar Deposito</a></li><li><a href="http://dev.2b.pagoefectivo.pe/ADM/AdFactu.aspx"><span class="lista_it">- </span>  Registrar Factura</a></li></ul></li></ul></li><li><img src="http://dev.2b.pagoEfectivo.pe/App_Themes/SPE/img/atras.png" alt="" class="element_atr" style="display:hidden" ></img><p class="contenedor_menu"><a class="cambio" href="" onclick="return false;"> Principal - Empresa</a><span class="cambio">Mostrar</span></p><ul class="submenu"><li class="has_submen"><p class="noactiva"><span class="lista_it">>></span> <a href="http://dev.2b.pagoefectivo.pe/ECO/PgPrl.aspx">  Resumen Pago por servicio</a></p></li><li class="has_submen"><p class="noactiva"><span class="lista_it">>></span> <a href="http://dev.2b.pagoefectivo.pe/ECO/DECIP.aspx">  Detalle de CIP</a></p></li></ul></li><li><img src="http://dev.2b.pagoEfectivo.pe/App_Themes/SPE/img/atras.png" alt="" class="element_atr" style="display:hidden" ></img><p class="contenedor_menu"><a href="http://dev.2b.pagoefectivo.pe/JPR/PgPrl.aspx"> Principal - Jefe de ...</a><span class="cambio">Mostrar</span></p><ul class="submenu"><li class="has_submen"><p class="noactiva"><span class="lista_it">>></span> <a class="cambioHijo" href="" onclick="return false;"> Agencia Bancaria</a></p><ul class="subsubmenu"><li><a href="http://dev.2b.pagoefectivo.pe/JPR/ADAgBa.aspx"><span class="lista_it">- </span>  Registrar</a></li><li><a href="http://dev.2b.pagoefectivo.pe/JPR/COAgBa.aspx"><span class="lista_it">- </span>  Consulta</a></li></ul></li><li class="has_submen"><p class="noactiva"><span class="lista_it">>></span> <a class="cambioHijo" href="" onclick="return false;"> Conciliaciones</a></p><ul class="subsubmenu"><li><a href="http://dev.2b.pagoefectivo.pe/CONC/COHConc.aspx"><span class="lista_it">- </span>  Consultar Conciliaciones</a></li><li><a href="http://dev.2b.pagoefectivo.pe/CONC/COHConcEnt.aspx"><span class="lista_it">- </span>  Consultar Conc. con Bancos</a></li><li><a href="http://dev.2b.pagoefectivo.pe/CONC/COHConcArch.aspx"><span class="lista_it">- </span>  Consultar Conc. de Archivos</a></li><li><a href="http://dev.2b.pagoefectivo.pe/CONC/COHDetConcBCP.aspx"><span class="lista_it">- </span>  Detalle Archivos Con...</a></li><li><a href="http://dev.2b.pagoefectivo.pe/CONC/PRConcDiaria.aspx"><span class="lista_it">- </span>  Conciliación Diaria</a></li><li><a href="http://dev.2b.pagoefectivo.pe/CONC/PRConcDiariaCons.aspx"><span class="lista_it">- </span>  Consulta Conc. Diaria</a></li><li><a href="http://dev.2b.pagoefectivo.pe/CONC/PRCPreConciliacion.aspx"><span class="lista_it">- </span>  PreConciliacion</a></li><li><a href="http://dev.2b.pagoefectivo.pe/CONC/PRPreConcCons.aspx"><span class="lista_it">- </span>  Consulta PreConciliacion</a></li></ul></li><li class="has_submen"><p class="noactiva"><span class="lista_it">>></span> <a href="http://dev.2b.pagoefectivo.pe/JPR/COComi.aspx"> Comisiones</a></p><ul class="subsubmenu"><li><a href="http://dev.2b.pagoefectivo.pe/JPR/ADComi.aspx"><span class="lista_it">- </span>  Registrar Comisiones</a></li></ul></li><li class="has_submen"><p class="noactiva"><span class="lista_it">>></span> <a href="http://dev.2b.pagoefectivo.pe/JPR/COHiPa.aspx">  Consultar Historial ...</a></p></li><li class="has_submen"><p class="noactiva"><span class="lista_it">>></span> <a class="cambioHijo" href="" onclick="return false;"> Cuentas Bancarias</a></p><ul class="subsubmenu"><li><a href="http://dev.2b.pagoefectivo.pe/JPR/ADCBServ.aspx"><span class="lista_it">- </span>  Asociar Cuentas Banc...</a></li><li><a href="http://dev.2b.pagoefectivo.pe/JPR/COCBServ.aspx"><span class="lista_it">- </span>  Consultar Asociacion...</a></li></ul></li><li class="has_submen"><p class="noactiva"><span class="lista_it">>></span> <a class="cambioHijo" href="" onclick="return false;"> Liquidación</a></p><ul class="subsubmenu"><li><a href="http://dev.2b.pagoefectivo.pe/TES/PgPrl.aspx"><span class="lista_it">- </span>  Liquidar Transaccion...</a></li></ul></li><li class="has_submen"><p class="noactiva"><span class="lista_it">>></span> <a href="http://dev.2b.pagoefectivo.pe/JPR/ExtornarCIP.aspx">  Extornar CIP</a></p></li><li class="has_submen"><p class="noactiva"><span class="lista_it">>></span> <a href="http://dev.2b.pagoefectivo.pe/JPR/ExpToGenCIP.aspx">  Expirado a Generado</a></p></li></ul></li><li><img src="http://dev.2b.pagoEfectivo.pe/App_Themes/SPE/img/atras.png" alt="" class="element_atr" /><p class="contenedor_menu"><a href="http://dev.2b.pagoefectivo.pe/ADM/PRCoAdm.aspx">Contactar Administrador</a></p></li><li><img src="http://dev.2b.pagoEfectivo.pe/App_Themes/SPE/img/atras.png" alt="" class="element_atr" /><p class="contenedor_menu"><a href="http://dev.2b.pagoefectivo.pe/CLI/ADCaCo.aspx">Cambiar Contraseña</a></p></li></ul>
+            </div>
+            <div id="contenidos">
+                <div id="header">
+                    <ul class="cabecera">
+                        <li><a href="../ayuda.aspx">¿Necesitas ayuda?</a><span></span></li>
+                        
+                        <li>
+                            <img src="http://dev.2b.pagoEfectivo.pe/App_Themes/SPE/img/gcomercio.png" alt="" /></li>
+                    </ul>
+                    <div id="datos_cab">
+                        <a href="http://www.verisign.com/" target="_blank">
+                            <img class="segur" src="http://dev.2b.pagoEfectivo.pe/App_Themes/SPE/img/segura.png" alt="" /></a>
+                        <p class="entera">
+                            Este es un ambiente seguro</p>
+                        <div class="mas_datos">
+                            <p>
+                                Hola</p>
+                            <p>
+                                <strong>
+                                    
+                                    <span id="ctl00_lblRol" class="nickName"> (Jefe de Producto)</span>
+                                    <span id="ctl00_lblNombreUsuario" class="subNickName">jmariods</span>
+                                </strong>
+                            </p>
+                            <a id="ctl00_LoginStatus1" href="javascript:__doPostBack(&#39;ctl00$LoginStatus1$ctl00&#39;,&#39;&#39;)">Cerrar sesión</a>
+                        </div>
+                        <img id="ctl00_ImgAvatar" class="fotoo" alt="[nombre usuario]" src="http://dev.2b.pagoefectivo.pe/img/temposave/1261632844564A3C7E2F0B4B0D3739245F64443E312C490A403C3D.jpg?654321" style="border-width:0px;border-width: 1px" />
+                    </div>
+                </div>
+                <div id="content">
+                    <p class="breadcrumb" style="width: 76%; float: left">
+                        <label>Principal - Administrador</label><span> / </span><label>Servicio</label><span> / </span><label>Actualizar Plantilla</label></p>
+                    <p class="breadcrumb" style="width: 24%; float: right">
+                        <img src="http://dev.2b.pagoEfectivo.pe/App_Themes/SPE/img/calendario.png" alt="">  24 nov 2017  <img src="http://dev.2b.pagoEfectivo.pe/App_Themes/SPE/img/reloj.png" alt="">   12:03 p.m.</p>
+                    <div style="clear: both">
+                    </div>
+                    <div id="errores" style="display: none;">
+                    </div>
+                    <div style="clear: both">
+                    </div>
+    <script type="text/javascript">
+        function hideModalPopUp() {
+            $("#ctl00_ContentPlaceHolder1_pnlNuevoParametro").hide();
+            return;
+        }
+        function loadEditor(id, idbutton) {
+            if ($('#' + id).length === 0) {
+                return;
+            }
+
+            deleteEditor(id);
+            CKEDITOR.replace(id, { fullPage: true });
+
+            CKEDITOR.instances[id].on('blur', function () {
+                CKEDITOR.instances[id].updateElement();
+            });
+        }
+
+        function deleteEditor(id) {
+            var instance = CKEDITOR.instances[id];
+            if (instance) {
+                CKEDITOR.remove(instance);
+            }
+        }
+    </script>
+
+    <h2>Actualizar Plantilla</h2>
+    <div class="conten_pasos3" style="min-height: 300px">
+        <h4> Datos del Servicio</h4>
+        <div id="ctl00_ContentPlaceHolder1_upFiltros">
+        <input type="hidden" name="ctl00$ContentPlaceHolder1$hdfIdPlantilla" id="ctl00_ContentPlaceHolder1_hdfIdPlantilla" />
+        <ul class="datos_cip2">
+            <li class="t1"><span class="color">>></span> Empresa: </li>
+            <li class="t2">
+                <select name="ctl00$ContentPlaceHolder1$ddlEmpresa" onchange="javascript:setTimeout(&#39;__doPostBack(\&#39;ctl00$ContentPlaceHolder1$ddlEmpresa\&#39;,\&#39;\&#39;)&#39;, 0)" id="ctl00_ContentPlaceHolder1_ddlEmpresa" class="neu" style="float: left">
+		<option selected="selected" value="">::Seleccione::</option>
+		<option value="152">365 OUTLET PERU SAC</option>
+		<option value="44">3B MARKETING GESTION EMPRESARIAL S.A.C.</option>
+		<option value="157">ADMINISTRADORA DE NEGOCIOS DE TRANSPORTE SAC</option>
+		<option value="39">ALAMESA SERVICE SRL</option>
+		<option value="30">Aldo Espino Servicios Medicos S.Civil de R. L.</option>
+		<option value="79">ALMAT PERU S.A.C.</option>
+		<option value="46">ANDALUNA S.A.C</option>
+		<option value="140">ARGENTARIA S.A.C.</option>
+		<option value="40">ARTE MANIFIESTO SAC</option>
+		<option value="156">Arturo Christian Wong Poggi</option>
+		<option value="102">ASOCIACION EDITORIAL BRU&#209;O</option>
+		<option value="76">AUDIOPHILE S.A.C.</option>
+		<option value="3">AUTOSEL SRLTDA</option>
+		<option value="29">B-PAGO S.A.C</option>
+		<option value="149">BIGBOX PERU S.A.C.</option>
+		<option value="82">BoaCompra S.A</option>
+		<option value="115">BOSTON SERVICIOS MEDICOS SOCIEDAD ANONIMA CERRADA</option>
+		<option value="114">C&#193;MARA DE COMERCIO LIMA</option>
+		<option value="24">CAYDEN LIMITED</option>
+		<option value="125">Cero 51 SAC</option>
+		<option value="126">Cero 51 SAC</option>
+		<option value="136">Claudia Lorena Rolandi Serrano</option>
+		<option value="8">Club del Vino</option>
+		<option value="49">COCONA PERU S.A.C.</option>
+		<option value="81">COMERCIAL BSB PER&#218; S.A.</option>
+		<option value="17">COMERCIAL MONT S.A.C</option>
+		<option value="119">COMERCIALIZADORA DE NATURALEZA Y SALUD S.A.C</option>
+		<option value="25">COMERCIALIZADORA LATINOAMERICANA DE LIBROS ELECTRONICOS S.A.C. - COLALE S.A.C.</option>
+		<option value="12">Comercio Electr&#243;nico Per&#250; SAC</option>
+		<option value="33">COMEXA COMERCIALIZADORA EXTRANJERA S.A. SUCURSAL DEL PERU</option>
+		<option value="158">Compa&#241;&#237;a Peruana de E-commerce</option>
+		<option value="60">Computer Shop On Line S.A.C.</option>
+		<option value="141">CONFETTI CELEBRACIONES SOCIEDAD ANONIMA CERRADA</option>
+		<option value="147">COSME IVAN CHOQUE QUISPE</option>
+		<option value="19">COSTAMAR TRAVEL CRUISE &amp; TOURS S.A.C.</option>
+		<option value="134">CREATIVE SOLUTIONS DEL PERU S.A.C</option>
+		<option value="109">CUPONATIC PERU S.A.C.</option>
+		<option value="13">CUPONIDAD PERU S.A.C.</option>
+		<option value="97">DATING LATAM S.A.C.</option>
+		<option value="99">DOMIREPS S.A.C</option>
+		<option value="96">DOMIRUTH TRAVEL SERVICE S.A.C</option>
+		<option value="110">DOTWORKERS PERU S.A.C.</option>
+		<option value="34">DUHEM S.A.C</option>
+		<option value="54">DyS GLOBAL INVESTMENTS</option>
+		<option value="154">EBANX PERU S.A.C.</option>
+		<option value="66">EDITORIAL DIGITAL DEL PERU S.A.C.</option>
+		<option value="90">EH DATA S.A.C.</option>
+		<option value="122">Eleven Gorillas SRL</option>
+		<option value="107">EMPRESA A</option>
+		<option value="92">EMPRESA DE TRANSPORTE TURISTICO OLANO S.A.</option>
+		<option value="74">EMPRESA DIGITAL PERUANA S.A.C.</option>
+		<option value="1">Empresa Editora El Comercio S.A.</option>
+		<option value="67">Empresa Editora El Comercio S.A. - Kotear</option>
+		<option value="84">Empresa Editora El Comercio S.A. - Urbania_Neoauto</option>
+		<option value="68">Empresa Editora El Comercio S.A.-PeruRed</option>
+		<option value="137">EMUNAH TRAVEL PERU SAC</option>
+		<option value="71">ENOVEDDA S.A.C.</option>
+		<option value="77">ESCUELA DE NEGOCIOS BRACE S.A.C.</option>
+		<option value="164">ESTADO DEL ARTE SAC</option>
+		<option value="145">ESTAMPA LO QUE QUIERAS.COM E.I.R.L</option>
+		<option value="35">Estereofonica</option>
+		<option value="153">FERREHATUN E.I.R.L.</option>
+		<option value="111">GABED S.A.C</option>
+		<option value="118">Gabriela Cortez Villafuerte</option>
+		<option value="116">GIFT HUNTER S.A.C.</option>
+		<option value="132">GOLDEN DESING SAC</option>
+		<option value="86">GONZALES CORNEJO JUAN ALEXANDER</option>
+		<option value="162">GRUPO AMERICANO DE COMERCIO SOCIEDAD ANONIMA CERRADA GRAMECO S.A.C.</option>
+		<option value="14">GRUPO COMERCIALIZADOR DE FLORES S.A.C.</option>
+		<option value="93">GRUPO CYGNUS S.A.C.</option>
+		<option value="105">Grupo Deltron S.A.</option>
+		<option value="148">GRUPO GEARD SAS</option>
+		<option value="170">grupo ripley sac</option>
+		<option value="72">GRUPO SMART TEC S.A.C</option>
+		<option value="80">GULA FOODS SAC</option>
+		<option value="161">GUTIERREZ GAMIO JORGE EDUARDO</option>
+		<option value="163">HAWKERS AMERICAS SAC</option>
+		<option value="100">INSTITUTO DE EDUCACION SUPERIOR TECNOLOGICO PRIVADO PERUANO ALEMAN SAC</option>
+		<option value="85">INTRALOT DE PERU SAC</option>
+		<option value="108">INVERSIONES MENTA S.A.C.</option>
+		<option value="32">KSTORAGE S.R.L.</option>
+		<option value="20">L &amp; L Partners SAC</option>
+		<option value="95">L.C. BUSRE S.A.C.</option>
+		<option value="53">LA CELESTINA S.A.C.</option>
+		<option value="11">LACEF E.I.R.L</option>
+		<option value="57">LAS TRAPERAS S.A.C</option>
+		<option value="155">Latinoam&#233;rica Hosting</option>
+		<option value="113">LAVRU S.A.C</option>
+		<option value="61">LAWGAMERS S.A.C</option>
+		<option value="75">LINIO PERU S.A.C.</option>
+		<option value="64">LUKANA AUCTIONS S.R.L.</option>
+		<option value="7">MAPFRE PERU COMPANIA DE SEGUROS Y REASEGUROS</option>
+		<option value="47">MARBERPRIM S.A.C.</option>
+		<option value="117">MARINA MORA PRODUCTOS E.I.R.L.</option>
+		<option value="150">MAS IDEAS Y SOLUCIONES S.A.C. _MASISOL S.A.C.</option>
+		<option value="78">MCM TIRES S.A.C.</option>
+		<option value="45">MEDIOS DE PAGOS VIRTUALES S.A.C.</option>
+		<option value="43">Melina Victoria Cayo Ruiz</option>
+		<option value="48">MI ENFERMERA S.A.C.</option>
+		<option value="94">MI LUCA SI VALE S.A.C.</option>
+		<option value="138">MIPYO MI PROPIO YO TU PSICOLOGIA AMIGA E.I.R.L.</option>
+		<option value="26">MOULD MADE S.A.</option>
+		<option value="171">MUNICIPALIDAD DE BARRANCO</option>
+		<option value="87">NETPAGOS SAC</option>
+		<option value="63">NEURONA S.A.C.</option>
+		<option value="56">NEWSAT LATIN S.A.C.</option>
+		<option value="131">NICSMEDIA SAC</option>
+		<option value="59">Nubelo Solutions S.L</option>
+		<option value="10">OFERTOP S.A.C. - IQUIERO</option>
+		<option value="18">OFERTOP S.A.C. - OFERTOP</option>
+		<option value="52">OFERTOP S.A.C. - OFERTOP 3</option>
+		<option value="4">OFERTOP S.A.C. - PLAZATOP</option>
+		<option value="103">OFERTOP S.A.C. - SUPERCUPON</option>
+		<option value="51">OFERTOP S.A.C. - TIENDA CLUB</option>
+		<option value="168">ONLINE.PE SAC</option>
+		<option value="123">OPTIMAX SRL</option>
+		<option value="2">ORBIS VENTURES SAC</option>
+		<option value="23">Oveja Negra</option>
+		<option value="6">PayCash S.A.C</option>
+		<option value="42">PERUVIAN AIR LINE S.A.</option>
+		<option value="65">PERUVIAN NET E.I.R.L.</option>
+		<option value="69">PISCO SOUR MEDIA S.A.C.</option>
+		<option value="41">Plaza21</option>
+		<option value="135">PLibros SAC</option>
+		<option value="62">POLOLO GAMING LIMITED</option>
+		<option value="36">PRINTUS S.A.C.</option>
+		<option value="28">Promotora de Turismo Nuevo Mundo S.A.</option>
+		<option value="167">QSOTO E.I.R.L.</option>
+		<option value="129">QUALITY PRODUCTS</option>
+		<option value="16">QUIERESCOMPRA S.A.C.</option>
+		<option value="173">Razon Social Prueba 2</option>
+		<option value="174">Razon Social Prueba 2</option>
+		<option value="175">Razon Social Prueba 3</option>
+		<option value="176">Razon Social Prueba 4</option>
+		<option value="120">RC CORP S.A.C.</option>
+		<option value="15">RED CIENTIFICA PERUANA</option>
+		<option value="133">RIMAC INTERNACIONAL COMPA&#209;IA DE SEGUROS Y REASEGUROS</option>
+		<option value="128">SAGA FALABELLA S. A.</option>
+		<option value="151">SALAS CARHUAVILCA XIMENA HAYDEE</option>
+		<option value="58">SASSY BOX S.A.C.</option>
+		<option value="106">Smart2Pay B.V.</option>
+		<option value="130">SOCIEMPEX SAC</option>
+		<option value="121">SODIMAC PERU S.A.</option>
+		<option value="172">SODIMAC PERU S.A.</option>
+		<option value="124">SOFT ONE CORPORATION SACc</option>
+		<option value="98">SOLUCIONES ITC PERU EIRL</option>
+		<option value="139">SORPRESAS EXPRESS S.A.C.</option>
+		<option value="70">SORPRESAS IMPORT E.I.R.L</option>
+		<option value="83">STAR UP S.A</option>
+		<option value="144">SUMAC HUAYNA LLACTA S.A.C.</option>
+		<option value="166">T&amp;T MEGA REPRESENTACIONES E.I.R.L.</option>
+		<option value="89">TELEFONICA DEL PERU SAA</option>
+		<option value="31">TIGGRES S.A.</option>
+		<option value="88">Townview Trading Limited</option>
+		<option value="165">TRANSPORTE Y LOGISTICA INTELIGENTE S.A.C.</option>
+		<option value="127">Triathlon S.A.C.</option>
+		<option value="91">TURISMO CIVA S.A.C.</option>
+		<option value="27">UGARRIZA MARTINEZ DORIS XAVIERA</option>
+		<option value="146">ULEARN S.A.C</option>
+		<option value="101">UNDERWERE PERU E.I.R.L</option>
+		<option value="112">UNG MIN HWA SOCIEDAD ANONIMA CERRADA - U.M.H. S.A.C.</option>
+		<option value="37">VALE GANGAS S.A.C</option>
+		<option value="104">VENTAS EXPRESS E.I.R.L.</option>
+		<option value="169">VIDEOMAS SAC</option>
+		<option value="21">Viktoys S.A.C.</option>
+		<option value="38">VIP SOUL SAC</option>
+		<option value="73">VIRTUALIA NEGOCIOS S.A.C.</option>
+		<option value="9">VOZT SAC</option>
+		<option value="160">WEB PROFESSIONAL PERU EIRL</option>
+		<option value="142">WORLD BEST PRODUCTS SAC</option>
+		<option value="159">XCHANGE PERU S.A.C</option>
+		<option value="50">YACHAY TELECOMUNICACIONES S.A.C.</option>
+		<option value="143">YOUR ELECTRONIC SUPPLIER S.A.C</option>
+		<option value="22">YOUROUTLET PERU S.A.C.</option>
+		<option value="55">Z M O S.A.C.</option>
+
+	</select>
+                        <span id="ctl00_ContentPlaceHolder1_rfvEmpresa" style="color:Red;visibility:hidden;">*</span>
+                    </li>
+                    <li class="t1"><span class="color">>></span> Servicio: </li>
+                    <li class="t2">
+                        <select name="ctl00$ContentPlaceHolder1$ddlServicio" id="ctl00_ContentPlaceHolder1_ddlServicio" class="neu" style="float: left">
+		<option selected="selected" value="">::Seleccione::</option>
+
+	</select>
+                        <span id="ctl00_ContentPlaceHolder1_rfvServicio" style="color:Red;visibility:hidden;">*</span>
+                    </li>
+                    <li class="t1"><span class="color">>></span> Moneda: </li>
+                    <li class="t2">
+                        <select name="ctl00$ContentPlaceHolder1$ddlMoneda" onchange="javascript:setTimeout(&#39;__doPostBack(\&#39;ctl00$ContentPlaceHolder1$ddlMoneda\&#39;,\&#39;\&#39;)&#39;, 0)" id="ctl00_ContentPlaceHolder1_ddlMoneda" class="neu" style="float: left">
+		<option selected="selected" value="">::Seleccione::</option>
+		<option value="1">NUEVOS SOLES</option>
+		<option value="2">DOLARES AMERICANOS</option>
+		<option value="3">EUROS</option>
+		<option value="4">FRANCOS SUIZOS</option>
+		<option value="5">PESOS CHILENOS</option>
+
+	</select>
+                        <span id="ctl00_ContentPlaceHolder1_rfvIdMoneda" style="color:Red;visibility:hidden;">*</span>
+                    </li>
+                    <li class="t1"><span class="color">>></span> Variaci&oacute;n: </li>
+                    <li class="t2">
+                        <select name="ctl00$ContentPlaceHolder1$ddlTipoVariacion" id="ctl00_ContentPlaceHolder1_ddlTipoVariacion" class="neu" style="float: left">
+		<option value="st">Standar</option>
+		<option value="en">Ingles</option>
+		<option value="fr">Frances</option>
+
+	</select>
+                    </li>
+                    <li class="t1"><span class="color">>></span> Tipo de Plantilla: </li>
+                    <li class="t2">
+                        <select name="ctl00$ContentPlaceHolder1$ddlTipoPlantilla" id="ctl00_ContentPlaceHolder1_ddlTipoPlantilla" class="neu" style="float: left">
+		<option selected="selected" value="">::Seleccione::</option>
+
+	</select>
+                        <span id="ctl00_ContentPlaceHolder1_rfvTipoPlantilla" style="color:Red;visibility:hidden;">*</span>
+                    </li>
+                    <li class="t1"><span class="color">>></span> Descripci&oacute;n: </li>
+                    <li class="t2">
+                        <input name="ctl00$ContentPlaceHolder1$txtPlantillaDesc" type="text" readonly="readonly" id="ctl00_ContentPlaceHolder1_txtPlantillaDesc" class="normal" />
+                    </li>                    
+                    <li class="complet" style="height: auto">
+                        <span id="ctl00_ContentPlaceHolder1_lblMsjEstructuraHTML" style="width: 100%; height: auto; clear: both"></span>
+                        <input type="submit" name="ctl00$ContentPlaceHolder1$btnBuscar" value="Buscar" onclick="javascript:WebForm_DoPostBackWithOptions(new WebForm_PostBackOptions(&quot;ctl00$ContentPlaceHolder1$btnBuscar&quot;, &quot;&quot;, true, &quot;ValidaCampos&quot;, &quot;&quot;, false, false))" id="ctl00_ContentPlaceHolder1_btnBuscar" class="input_azul3" />
+                        <input type="submit" name="ctl00$ContentPlaceHolder1$btnLimpiar" value="Limpiar" id="ctl00_ContentPlaceHolder1_btnLimpiar" class="input_azul4" />
+                    </li>
+                </ul>
+                <div id="ctl00_ContentPlaceHolder1_ValidationSummary1" style="color:Red;padding-left:200px;display:none;">
+
+	</div>
+            
+</div>
+        <div style="clear: both">
+        </div>
+    </div>
+    <div id="ctl00_ContentPlaceHolder1_upEsctructuraHTML">
+	
+            
+        
+</div>
+    <div style="clear: both">
+    </div>
+    <div id="ctl00_ContentPlaceHolder1_UpdatePanel1">
+	
+            
+            
+            <input type="image" name="ctl00$ContentPlaceHolder1$imgbtnRegresarHidden" id="ctl00_ContentPlaceHolder1_imgbtnRegresarHidden" class="Hidden" src="http://dev.2b.pagoEfectivo.pe/img/closeX.GIF" style="border-width:0px;display: none;" />
+            <div id="ctl00_ContentPlaceHolder1_pnlNuevoParametro" class="conten_pasos3" style="display: none;
+                background: white; width: 650px; height: auto; min-height: 0px;">
+		
+                <div style="float: right; overflow: hidden;">
+                    <input type="image" name="ctl00$ContentPlaceHolder1$imgbtnRegresar" id="ctl00_ContentPlaceHolder1_imgbtnRegresar" src="http://dev.2b.pagoEfectivo.pe/img/closeX.GIF" style="border-width:0px;" />
+                </div>
+                <input type="hidden" name="ctl00$ContentPlaceHolder1$hdfIdParametroPlantilla" id="ctl00_ContentPlaceHolder1_hdfIdParametroPlantilla" />
+                <h4>
+                    Datos de Parámetros:</h4>
+                <div id="ctl00_ContentPlaceHolder1_divTipoParametro">
+                    <ul class="datos_cip2">
+                        <li class="t1"><span class="color">>></span> Tipo de Par&aacute;metro:</li>
+                        <li class="t2">
+                            <select name="ctl00$ContentPlaceHolder1$ddlTipoParametro" onchange="javascript:setTimeout(&#39;__doPostBack(\&#39;ctl00$ContentPlaceHolder1$ddlTipoParametro\&#39;,\&#39;\&#39;)&#39;, 0)" id="ctl00_ContentPlaceHolder1_ddlTipoParametro" class="normal">
+			<option selected="selected" value="410">Din&#225;mico</option>
+			<option value="411">Est&#225;tico</option>
+
+		</select>
+                        </li>
+                    </ul>
+                </div>
+                <div id="ctl00_ContentPlaceHolder1_divParametro">
+                    <ul class="datos_cip2">
+                        <li class="t1"><span class="color">>></span> Par&aacute;metro:</li>
+                        <li class="t2">
+                            <select name="ctl00$ContentPlaceHolder1$ddlParametros" onchange="javascript:setTimeout(&#39;__doPostBack(\&#39;ctl00$ContentPlaceHolder1$ddlParametros\&#39;,\&#39;\&#39;)&#39;, 0)" id="ctl00_ContentPlaceHolder1_ddlParametros" class="normal">
+			<option selected="selected" value="1">UsuNombre</option>
+			<option value="2">UsuApellido</option>
+			<option value="3">CIP</option>
+			<option value="4">EmpContrNombre</option>
+			<option value="5">ServNombre</option>
+			<option value="6">ConceptoPago</option>
+			<option value="7">Moneda</option>
+			<option value="8">Monto</option>
+			<option value="9">CIPCodigoBarra</option>
+			<option value="10">FechaVencimiento</option>
+			<option value="11">HoraVencimiento</option>
+			<option value="12">idEmpresa</option>
+			<option value="13">idServicio</option>
+			<option value="14">FechaEmision</option>
+			<option value="15">HoraEmision</option>
+			<option value="16">SeccionValidacion</option>
+			<option value="17">Cuenta</option>
+			<option value="18">CodigoRegistro</option>
+			<option value="19">Contrasenia</option>
+			<option value="20">SeccionInfoPago02</option>
+			<option value="21">SeccionInfoPago03</option>
+			<option value="22">SeccionInfoPago100</option>
+			<option value="23">FechaVencimiento</option>
+			<option value="24">HoraVencimiento</option>
+			<option value="25">EmailCliente</option>
+			<option value="26">SeccionInfoRes02</option>
+			<option value="27">SeccionInfoRes03</option>
+			<option value="28">SeccionInfoRes05</option>
+			<option value="29">SeccionInfoRes100</option>
+			<option value="30">NroPedido</option>
+			<option value="31">FechaExpiracion</option>
+			<option value="32">TipoComprobante</option>
+			<option value="33">Ruc</option>
+			<option value="34">RazonSocial</option>
+			<option value="35">Direccion</option>
+			<option value="36">MetodoPago</option>
+			<option value="37">DNI</option>
+			<option value="38">Telefono</option>
+			<option value="39">Anexo</option>
+			<option value="40">Celular</option>
+			<option value="41">DatoAdicional</option>
+			<option value="42">Direccion Usuario</option>
+
+		</select>
+                            <li class="t1"><span class="color">>></span> C&oacute;digo:</li>
+                            <li class="t2">
+                                <input name="ctl00$ContentPlaceHolder1$txtCodigo" type="text" maxlength="100" id="ctl00_ContentPlaceHolder1_txtCodigo" class="normal" />
+                            </li>
+                            <li class="t1"><span class="color">>></span> Etiqueta:</li>
+                            <li class="t2">
+                                <input name="ctl00$ContentPlaceHolder1$txtEtiqueta" type="text" maxlength="50" id="ctl00_ContentPlaceHolder1_txtEtiqueta" class="normal" />
+                            </li>
+                            <li class="t1"><span class="color">>></span> Descripci&oacute;n:</li>
+                            <li class="t2">
+                                <input name="ctl00$ContentPlaceHolder1$txtDescripcion" type="text" maxlength="100" id="ctl00_ContentPlaceHolder1_txtDescripcion" class="normal" />
+                            </li>
+                        </li>
+                    </ul>
+                </div>
+                <div id="ctl00_ContentPlaceHolder1_divValor">
+                    <ul class="datos_cip2">
+                        <li class="t1"><span class="color">>></span> Valor:</li>
+                        <li class="t2">
+                            <input name="ctl00$ContentPlaceHolder1$txtValor" type="text" maxlength="100" id="ctl00_ContentPlaceHolder1_txtValor" class="normal" />
+                        </li>
+                    </ul>
+                </div>
+                <div style="clear: both">
+                </div>
+                <span id="ctl00_ContentPlaceHolder1_lblMensajeParametros" class="MensajeTransaccion" style="padding-left: 200px"></span>
+                <ul class="datos_cip2">
+                    <li class="complet" style="margin-top: 10px">
+                        <input type="submit" name="ctl00$ContentPlaceHolder1$btnActualizarParametro" value="Actualizar" onclick="return ConfirmMe();" id="ctl00_ContentPlaceHolder1_btnActualizarParametro" class="input_azul5" />
+                        <input type="submit" name="ctl00$ContentPlaceHolder1$btnAgregar" value="Agregar" onclick="return ConfirmMe();" id="ctl00_ContentPlaceHolder1_btnAgregar" class="input_azul5" />
+                        <input type="submit" name="ctl00$ContentPlaceHolder1$btnCancelar" value="Cancelar" onclick="hideModalPopUp();" id="ctl00_ContentPlaceHolder1_btnCancelar" class="input_azul4" />
+                    </li>
+                </ul>
+            
+	</div>
+        
+</div>
+
+                </div>
+            </div>
+        </div>
+        <div class="divLoadingMensaje" style="display: none;">
+            <strong>
+                <img src="http://dev.2b.pagoEfectivo.pe/App_Themes/SPE/img/ajax-loader.gif" alt="Procesando..." />
+                Procesando... </strong>             
+        </div>
+     
+        <div class="divLoading" style="display: none;">
+        </div>
+        <div id="footer">
+            <div id="inner-footer">
+                <div class="lt-side">
+                    <h3>
+                        PagoEfectivo</h3>
+                    <span>Todos los derechos reservados 2012</span>
+                </div>
+                <div class="rt-side">
+                    <div class="sec-env">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+<script type="text/javascript">
+//<![CDATA[
+var Page_ValidationSummaries =  new Array(document.getElementById("ctl00_ContentPlaceHolder1_ValidationSummary1"));
+var Page_Validators =  new Array(document.getElementById("ctl00_ContentPlaceHolder1_rfvEmpresa"), document.getElementById("ctl00_ContentPlaceHolder1_rfvServicio"), document.getElementById("ctl00_ContentPlaceHolder1_rfvIdMoneda"), document.getElementById("ctl00_ContentPlaceHolder1_rfvTipoPlantilla"));
+//]]>
+</script>
+
+<script type="text/javascript">
+//<![CDATA[
+var ctl00_ContentPlaceHolder1_rfvEmpresa = document.all ? document.all["ctl00_ContentPlaceHolder1_rfvEmpresa"] : document.getElementById("ctl00_ContentPlaceHolder1_rfvEmpresa");
+ctl00_ContentPlaceHolder1_rfvEmpresa.controltovalidate = "ctl00_ContentPlaceHolder1_ddlEmpresa";
+ctl00_ContentPlaceHolder1_rfvEmpresa.errormessage = "Debe seleccionar la Empresa.";
+ctl00_ContentPlaceHolder1_rfvEmpresa.validationGroup = "ValidaCampos";
+ctl00_ContentPlaceHolder1_rfvEmpresa.evaluationfunction = "RequiredFieldValidatorEvaluateIsValid";
+ctl00_ContentPlaceHolder1_rfvEmpresa.initialvalue = "";
+var ctl00_ContentPlaceHolder1_rfvServicio = document.all ? document.all["ctl00_ContentPlaceHolder1_rfvServicio"] : document.getElementById("ctl00_ContentPlaceHolder1_rfvServicio");
+ctl00_ContentPlaceHolder1_rfvServicio.controltovalidate = "ctl00_ContentPlaceHolder1_ddlServicio";
+ctl00_ContentPlaceHolder1_rfvServicio.errormessage = "Debe seleccionar la Servicio.";
+ctl00_ContentPlaceHolder1_rfvServicio.validationGroup = "ValidaCampos";
+ctl00_ContentPlaceHolder1_rfvServicio.evaluationfunction = "RequiredFieldValidatorEvaluateIsValid";
+ctl00_ContentPlaceHolder1_rfvServicio.initialvalue = "";
+var ctl00_ContentPlaceHolder1_rfvIdMoneda = document.all ? document.all["ctl00_ContentPlaceHolder1_rfvIdMoneda"] : document.getElementById("ctl00_ContentPlaceHolder1_rfvIdMoneda");
+ctl00_ContentPlaceHolder1_rfvIdMoneda.controltovalidate = "ctl00_ContentPlaceHolder1_ddlMoneda";
+ctl00_ContentPlaceHolder1_rfvIdMoneda.errormessage = "Debe seleccionar el tipo de Moneda.";
+ctl00_ContentPlaceHolder1_rfvIdMoneda.validationGroup = "ValidaCampos";
+ctl00_ContentPlaceHolder1_rfvIdMoneda.evaluationfunction = "RequiredFieldValidatorEvaluateIsValid";
+ctl00_ContentPlaceHolder1_rfvIdMoneda.initialvalue = "";
+var ctl00_ContentPlaceHolder1_rfvTipoPlantilla = document.all ? document.all["ctl00_ContentPlaceHolder1_rfvTipoPlantilla"] : document.getElementById("ctl00_ContentPlaceHolder1_rfvTipoPlantilla");
+ctl00_ContentPlaceHolder1_rfvTipoPlantilla.controltovalidate = "ctl00_ContentPlaceHolder1_ddlTipoPlantilla";
+ctl00_ContentPlaceHolder1_rfvTipoPlantilla.errormessage = "Debe seleccionar el tipo de Plantilla.";
+ctl00_ContentPlaceHolder1_rfvTipoPlantilla.validationGroup = "ValidaCampos";
+ctl00_ContentPlaceHolder1_rfvTipoPlantilla.evaluationfunction = "RequiredFieldValidatorEvaluateIsValid";
+ctl00_ContentPlaceHolder1_rfvTipoPlantilla.initialvalue = "";
+//]]>
+</script>
+
+
+<script type="text/javascript">
+//<![CDATA[
+
+var Page_ValidationActive = false;
+if (typeof(ValidatorOnLoad) == "function") {
+    ValidatorOnLoad();
+}
+
+function ValidatorOnSubmit() {
+    if (Page_ValidationActive) {
+        return ValidatorCommonOnSubmit();
+    }
+    else {
+        return true;
+    }
+}
+        
+(function(id) {
+    var e = document.getElementById(id);
+    if (e) {
+        e.dispose = function() {
+            Array.remove(Page_ValidationSummaries, document.getElementById(id));
+        }
+        e = null;
+    }
+})('ctl00_ContentPlaceHolder1_ValidationSummary1');
+
+document.getElementById('ctl00_ContentPlaceHolder1_rfvEmpresa').dispose = function() {
+    Array.remove(Page_Validators, document.getElementById('ctl00_ContentPlaceHolder1_rfvEmpresa'));
+}
+
+document.getElementById('ctl00_ContentPlaceHolder1_rfvServicio').dispose = function() {
+    Array.remove(Page_Validators, document.getElementById('ctl00_ContentPlaceHolder1_rfvServicio'));
+}
+
+document.getElementById('ctl00_ContentPlaceHolder1_rfvIdMoneda').dispose = function() {
+    Array.remove(Page_Validators, document.getElementById('ctl00_ContentPlaceHolder1_rfvIdMoneda'));
+}
+
+document.getElementById('ctl00_ContentPlaceHolder1_rfvTipoPlantilla').dispose = function() {
+    Array.remove(Page_Validators, document.getElementById('ctl00_ContentPlaceHolder1_rfvTipoPlantilla'));
+}
+//]]>
+</script>
+<div class="container">
+  <h4> <i class="note-icon-summernote"></i> Summernote
+    <span class="label label-info">Bootstrap v3.3.7</span>
+    <span class="label label-success">with Summernote Icons</span>
+  </h4>
+  <div class="summernote"><p>Hello World</p></div>
+</div>
+</form>
+    <script src="http://dev.2b.pagoEfectivo.pe/App_Themes/SPE/js/jquery.cookie.js?v=201404251012" type="text/javascript"></script>
+    <script src="http://dev.2b.pagoEfectivo.pe/App_Themes/SPE/js/jquery.treeview.js?v=201404251012" type="text/javascript"></script>
+    <script src="http://dev.2b.pagoEfectivo.pe/App_Themes/SPE/js/jquery.general.js?v=201404251012" type="text/javascript"></script>
+    
+</body>
+</html>
