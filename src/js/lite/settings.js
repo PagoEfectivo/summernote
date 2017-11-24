@@ -111,9 +111,10 @@ $.summernote = $.extend($.summernote, {
     styleWithSpan: true,
     shortcuts: true,
     textareaAutoSync: true,
-    direction: null,
+    hintDirection: 'bottom',
     tooltip: 'auto',
     container: 'body',
+    maxTextLength: 0,
 
     styleTags: ['p', 'pre', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6'],
 
