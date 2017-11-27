@@ -72,7 +72,7 @@ $.summernote = $.extend($.summernote, {
       ['fontname', ['fontname']],
       ['color', ['color']],
       ['para', ['ul', 'ol', 'paragraph']],
-      ['table', ['table']],
+      // ['table', ['table']],
       ['insert', ['link', 'picture']],
       ['view', ['fullscreen', 'codeview', 'help']]
     ],
@@ -80,25 +80,25 @@ $.summernote = $.extend($.summernote, {
     // popover
     popatmouse: true,
     popover: {
-      image: [
-        ['imagesize', ['imageSize100', 'imageSize50', 'imageSize25']],
-        ['float', ['floatLeft', 'floatRight', 'floatNone']],
-        ['remove', ['removeMedia']]
-      ],
-      link: [
-        ['link', ['linkDialogShow', 'unlink']]
-      ],
-      table: [
-        ['add', ['addRowDown', 'addRowUp', 'addColLeft', 'addColRight']],
-        ['delete', ['deleteRow', 'deleteCol', 'deleteTable']]
-      ],
-      air: [
-        ['color', ['color']],
-        ['font', ['bold', 'underline', 'clear']],
-        ['para', ['ul', 'paragraph']],
-        ['table', ['table']],
-        ['insert', ['link', 'picture']]
-      ]
+      // image: [
+      //   ['imagesize', ['imageSize100', 'imageSize50', 'imageSize25']],
+      //   ['float', ['floatLeft', 'floatRight', 'floatNone']],
+      //   ['remove', ['removeMedia']]
+      // ],
+      // link: [
+      //   ['link', ['linkDialogShow', 'unlink']]
+      // ],
+      // table: [
+      //   ['add', ['addRowDown', 'addRowUp', 'addColLeft', 'addColRight']],
+      //   ['delete', ['deleteRow', 'deleteCol', 'deleteTable']]
+      // ],
+      // air: [
+      //   ['color', ['color']],
+      //   ['font', ['bold', 'underline', 'clear']],
+      //   ['para', ['ul', 'paragraph']],
+      //   ['table', ['table']],
+      //   ['insert', ['link', 'picture']]
+      // ]
     },
 
     // air mode: inline editor

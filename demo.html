@@ -13,7 +13,7 @@
 <script type="text/javascript" src="http://dev.2b.pagoEfectivo.pe/JScripts/jsGenerales.js?v=201404251012"></script>
 <script src="http://dev.2b.pagoEfectivo.pe/App_Themes/SPE/js/funciones.js?v=201404251012" type="text/javascript"></script>
 </head>
-    <link rel="stylesheet" href="../dist/bootstrap.css" />
+    <link rel="stylesheet" href="../dist/bootstrap-summernote.css" />
     <link rel="stylesheet" href="../dist/summernote.css">
     <title>summernote</title>
   
@@ -27,14 +27,12 @@
         $('.summernote').summernote({
           height: 500,
           lang: 'es-ES',
-          placeholder: 'Hello World',
+          tooltip: false,
           tabsize: 2
         });
       });
     </script>
 <body>
-
-
     <script type="text/javascript">
         function isPostBack() { //function to check if page is a postback-ed one
             return $('#_ispostback').val() == 'True';
@@ -434,16 +432,17 @@ return true;
             <div style="clear: both">
             </div>
         </div>
-        <body class="summernote-editor">
-                <div class="container">
-                  <!-- <h4> <i class="note-icon-summernote"></i> Summernote
-                    <span class="label label-info">Bootstrap v3.3.7</span>
-                    <span class="label label-success">with Summernote Icons</span>
-                  </h4> -->
-                  <div class="summernote"><p>Hello World</p></div>
-                </div>
-            </body>
+        <section class="summernote-editor">
+            <div class="container">
+                <!-- <h4> <i class="note-icon-summernote"></i> Summernote
+                <span class="label label-info">Bootstrap v3.3.7</span>
+                <span class="label label-success">with Summernote Icons</span>
+                </h4> -->
+                <div class="summernote"></div>
+            </div>
+        </section>
     </div>
+
 
     <div id="ctl00_ContentPlaceHolder1_upEsctructuraHTML">
 	
