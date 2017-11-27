@@ -13,16 +13,12 @@
 <script type="text/javascript" src="http://dev.2b.pagoEfectivo.pe/JScripts/jsGenerales.js?v=201404251012"></script>
 <script src="http://dev.2b.pagoEfectivo.pe/App_Themes/SPE/js/funciones.js?v=201404251012" type="text/javascript"></script>
 </head>
-	<!-- <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css" /> -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../dist/bootstrap.css" />
     <link rel="stylesheet" href="../dist/summernote.css">
     <title>summernote</title>
-	
-	<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
-    <!-- <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>  -->
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
-    <!-- <script src="//netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script> -->
+  
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script> 
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.js"></script>
     <script type="text/javascript" src="../dist/summernote.js"></script>
     <script src="lang/summernote-es-ES.js"></script>
   
@@ -38,7 +34,87 @@
     </script>
 <body>
 
+
+    <script type="text/javascript">
+        function isPostBack() { //function to check if page is a postback-ed one
+            return $('#_ispostback').val() == 'True';
+        }
+        $('#errores').css('display', 'none');
+        function alertDiv(mensaje) {
+            if (mensaje != "") {
+                //$('#errores').css('display', 'block');
+                $('#errores').show('slow');
+                $('#errores').text(mensaje);
+            }
+        }
+    </script>
+    <script type="text/javascript" language="javascript">
+        function pageLoad() {
+            if (!Sys.WebForms.PageRequestManager.getInstance().get_isInAsyncPostBack()) {
+                Sys.WebForms.PageRequestManager.getInstance().add_endRequest(AjaxEnd);
+                Sys.WebForms.PageRequestManager.getInstance().add_initializeRequest(AjaxBegin);
+            }
+        }
+        function AjaxEnd(sender, args) {
+            if ($('.pagerStyle>td>table>tbody>tr>td:eq(0)').length > 0)
+                if ($('.pagerStyle>td>table>tbody>tr>td:eq(0)').text() != 'Página :')
+                    $('.pagerStyle>td>table>tbody>tr>td:eq(0)').before('<td>P&aacute;gina :</td>');
+            $(".divLoadingMensaje").hide('fast');
+            $('.divLoading').hide('fold');
+        }
+        function AjaxBegin(sender, args) {
+            $(".divLoadingMensaje").show('fast');
+            $('.divLoading').show('blind');
+            $('#errores').css('display', 'none');
+        }
+        function maxLen(text, maxLen) {
+            return (text.value.length > (maxLen - 1)) ? true : false;
+        }
+    </script>
+
+    <input type="hidden" id="_ispostback" value="False" />
+    <form name="aspnetForm" method="post" action="ADEmail.aspx" onsubmit="javascript:return WebForm_OnSubmit();" id="aspnetForm">
 <div>
+<input type="hidden" name="__EVENTTARGET" id="__EVENTTARGET" value="" />
+<input type="hidden" name="__EVENTARGUMENT" id="__EVENTARGUMENT" value="" />
+<input type="hidden" name="__LASTFOCUS" id="__LASTFOCUS" value="" />
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+var theForm = document.forms['aspnetForm'];
+if (!theForm) {
+    theForm = document.aspnetForm;
+}
+function __doPostBack(eventTarget, eventArgument) {
+    if (!theForm.onsubmit || (theForm.onsubmit() != false)) {
+        theForm.__EVENTTARGET.value = eventTarget;
+        theForm.__EVENTARGUMENT.value = eventArgument;
+        theForm.submit();
+    }
+}
+//]]>
+</script>
+
+
+//<![CDATA[
+if (typeof(Sys) === 'undefined') throw new Error('ASP.NET Ajax client-side framework failed to load.');
+//]]>
+</script>
+
+<script type="text/javascript">
+//<![CDATA[
+function WebForm_OnSubmit() {
+if (typeof(ValidatorOnSubmit) == "function" && ValidatorOnSubmit() == false) return false;
+return true;
+}
+//]]>
+</script>
+
+<div>
+
+<input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="BD9F32A1" />
+<input type="hidden" name="__VIEWSTATEENCRYPTED" id="__VIEWSTATEENCRYPTED" value="" />
 </div>
     <div id="container">
         <div id="trucont">
@@ -86,251 +162,289 @@
                     </div>
                     <div style="clear: both">
                     </div>
-    <h2>Actualizar Plantilla</h2>
-    <div class="conten_pasos3" style="min-height: 300px">
-        <h4> Datos del Servicio</h4>
-        <div id="ctl00_ContentPlaceHolder1_upFiltros">
-        <input type="hidden" name="ctl00$ContentPlaceHolder1$hdfIdPlantilla" id="ctl00_ContentPlaceHolder1_hdfIdPlantilla" />
-        <ul class="datos_cip2">
-            <li class="t1"><span class="color">>></span> Empresa: </li>
-            <li class="t2">
-                <select name="ctl00$ContentPlaceHolder1$ddlEmpresa" onchange="javascript:setTimeout(&#39;__doPostBack(\&#39;ctl00$ContentPlaceHolder1$ddlEmpresa\&#39;,\&#39;\&#39;)&#39;, 0)" id="ctl00_ContentPlaceHolder1_ddlEmpresa" class="neu" style="float: left">
-		<option selected="selected" value="">::Seleccione::</option>
-		<option value="152">365 OUTLET PERU SAC</option>
-		<option value="44">3B MARKETING GESTION EMPRESARIAL S.A.C.</option>
-		<option value="157">ADMINISTRADORA DE NEGOCIOS DE TRANSPORTE SAC</option>
-		<option value="39">ALAMESA SERVICE SRL</option>
-		<option value="30">Aldo Espino Servicios Medicos S.Civil de R. L.</option>
-		<option value="79">ALMAT PERU S.A.C.</option>
-		<option value="46">ANDALUNA S.A.C</option>
-		<option value="140">ARGENTARIA S.A.C.</option>
-		<option value="40">ARTE MANIFIESTO SAC</option>
-		<option value="156">Arturo Christian Wong Poggi</option>
-		<option value="102">ASOCIACION EDITORIAL BRU&#209;O</option>
-		<option value="76">AUDIOPHILE S.A.C.</option>
-		<option value="3">AUTOSEL SRLTDA</option>
-		<option value="29">B-PAGO S.A.C</option>
-		<option value="149">BIGBOX PERU S.A.C.</option>
-		<option value="82">BoaCompra S.A</option>
-		<option value="115">BOSTON SERVICIOS MEDICOS SOCIEDAD ANONIMA CERRADA</option>
-		<option value="114">C&#193;MARA DE COMERCIO LIMA</option>
-		<option value="24">CAYDEN LIMITED</option>
-		<option value="125">Cero 51 SAC</option>
-		<option value="126">Cero 51 SAC</option>
-		<option value="136">Claudia Lorena Rolandi Serrano</option>
-		<option value="8">Club del Vino</option>
-		<option value="49">COCONA PERU S.A.C.</option>
-		<option value="81">COMERCIAL BSB PER&#218; S.A.</option>
-		<option value="17">COMERCIAL MONT S.A.C</option>
-		<option value="119">COMERCIALIZADORA DE NATURALEZA Y SALUD S.A.C</option>
-		<option value="25">COMERCIALIZADORA LATINOAMERICANA DE LIBROS ELECTRONICOS S.A.C. - COLALE S.A.C.</option>
-		<option value="12">Comercio Electr&#243;nico Per&#250; SAC</option>
-		<option value="33">COMEXA COMERCIALIZADORA EXTRANJERA S.A. SUCURSAL DEL PERU</option>
-		<option value="158">Compa&#241;&#237;a Peruana de E-commerce</option>
-		<option value="60">Computer Shop On Line S.A.C.</option>
-		<option value="141">CONFETTI CELEBRACIONES SOCIEDAD ANONIMA CERRADA</option>
-		<option value="147">COSME IVAN CHOQUE QUISPE</option>
-		<option value="19">COSTAMAR TRAVEL CRUISE &amp; TOURS S.A.C.</option>
-		<option value="134">CREATIVE SOLUTIONS DEL PERU S.A.C</option>
-		<option value="109">CUPONATIC PERU S.A.C.</option>
-		<option value="13">CUPONIDAD PERU S.A.C.</option>
-		<option value="97">DATING LATAM S.A.C.</option>
-		<option value="99">DOMIREPS S.A.C</option>
-		<option value="96">DOMIRUTH TRAVEL SERVICE S.A.C</option>
-		<option value="110">DOTWORKERS PERU S.A.C.</option>
-		<option value="34">DUHEM S.A.C</option>
-		<option value="54">DyS GLOBAL INVESTMENTS</option>
-		<option value="154">EBANX PERU S.A.C.</option>
-		<option value="66">EDITORIAL DIGITAL DEL PERU S.A.C.</option>
-		<option value="90">EH DATA S.A.C.</option>
-		<option value="122">Eleven Gorillas SRL</option>
-		<option value="107">EMPRESA A</option>
-		<option value="92">EMPRESA DE TRANSPORTE TURISTICO OLANO S.A.</option>
-		<option value="74">EMPRESA DIGITAL PERUANA S.A.C.</option>
-		<option value="1">Empresa Editora El Comercio S.A.</option>
-		<option value="67">Empresa Editora El Comercio S.A. - Kotear</option>
-		<option value="84">Empresa Editora El Comercio S.A. - Urbania_Neoauto</option>
-		<option value="68">Empresa Editora El Comercio S.A.-PeruRed</option>
-		<option value="137">EMUNAH TRAVEL PERU SAC</option>
-		<option value="71">ENOVEDDA S.A.C.</option>
-		<option value="77">ESCUELA DE NEGOCIOS BRACE S.A.C.</option>
-		<option value="164">ESTADO DEL ARTE SAC</option>
-		<option value="145">ESTAMPA LO QUE QUIERAS.COM E.I.R.L</option>
-		<option value="35">Estereofonica</option>
-		<option value="153">FERREHATUN E.I.R.L.</option>
-		<option value="111">GABED S.A.C</option>
-		<option value="118">Gabriela Cortez Villafuerte</option>
-		<option value="116">GIFT HUNTER S.A.C.</option>
-		<option value="132">GOLDEN DESING SAC</option>
-		<option value="86">GONZALES CORNEJO JUAN ALEXANDER</option>
-		<option value="162">GRUPO AMERICANO DE COMERCIO SOCIEDAD ANONIMA CERRADA GRAMECO S.A.C.</option>
-		<option value="14">GRUPO COMERCIALIZADOR DE FLORES S.A.C.</option>
-		<option value="93">GRUPO CYGNUS S.A.C.</option>
-		<option value="105">Grupo Deltron S.A.</option>
-		<option value="148">GRUPO GEARD SAS</option>
-		<option value="170">grupo ripley sac</option>
-		<option value="72">GRUPO SMART TEC S.A.C</option>
-		<option value="80">GULA FOODS SAC</option>
-		<option value="161">GUTIERREZ GAMIO JORGE EDUARDO</option>
-		<option value="163">HAWKERS AMERICAS SAC</option>
-		<option value="100">INSTITUTO DE EDUCACION SUPERIOR TECNOLOGICO PRIVADO PERUANO ALEMAN SAC</option>
-		<option value="85">INTRALOT DE PERU SAC</option>
-		<option value="108">INVERSIONES MENTA S.A.C.</option>
-		<option value="32">KSTORAGE S.R.L.</option>
-		<option value="20">L &amp; L Partners SAC</option>
-		<option value="95">L.C. BUSRE S.A.C.</option>
-		<option value="53">LA CELESTINA S.A.C.</option>
-		<option value="11">LACEF E.I.R.L</option>
-		<option value="57">LAS TRAPERAS S.A.C</option>
-		<option value="155">Latinoam&#233;rica Hosting</option>
-		<option value="113">LAVRU S.A.C</option>
-		<option value="61">LAWGAMERS S.A.C</option>
-		<option value="75">LINIO PERU S.A.C.</option>
-		<option value="64">LUKANA AUCTIONS S.R.L.</option>
-		<option value="7">MAPFRE PERU COMPANIA DE SEGUROS Y REASEGUROS</option>
-		<option value="47">MARBERPRIM S.A.C.</option>
-		<option value="117">MARINA MORA PRODUCTOS E.I.R.L.</option>
-		<option value="150">MAS IDEAS Y SOLUCIONES S.A.C. _MASISOL S.A.C.</option>
-		<option value="78">MCM TIRES S.A.C.</option>
-		<option value="45">MEDIOS DE PAGOS VIRTUALES S.A.C.</option>
-		<option value="43">Melina Victoria Cayo Ruiz</option>
-		<option value="48">MI ENFERMERA S.A.C.</option>
-		<option value="94">MI LUCA SI VALE S.A.C.</option>
-		<option value="138">MIPYO MI PROPIO YO TU PSICOLOGIA AMIGA E.I.R.L.</option>
-		<option value="26">MOULD MADE S.A.</option>
-		<option value="171">MUNICIPALIDAD DE BARRANCO</option>
-		<option value="87">NETPAGOS SAC</option>
-		<option value="63">NEURONA S.A.C.</option>
-		<option value="56">NEWSAT LATIN S.A.C.</option>
-		<option value="131">NICSMEDIA SAC</option>
-		<option value="59">Nubelo Solutions S.L</option>
-		<option value="10">OFERTOP S.A.C. - IQUIERO</option>
-		<option value="18">OFERTOP S.A.C. - OFERTOP</option>
-		<option value="52">OFERTOP S.A.C. - OFERTOP 3</option>
-		<option value="4">OFERTOP S.A.C. - PLAZATOP</option>
-		<option value="103">OFERTOP S.A.C. - SUPERCUPON</option>
-		<option value="51">OFERTOP S.A.C. - TIENDA CLUB</option>
-		<option value="168">ONLINE.PE SAC</option>
-		<option value="123">OPTIMAX SRL</option>
-		<option value="2">ORBIS VENTURES SAC</option>
-		<option value="23">Oveja Negra</option>
-		<option value="6">PayCash S.A.C</option>
-		<option value="42">PERUVIAN AIR LINE S.A.</option>
-		<option value="65">PERUVIAN NET E.I.R.L.</option>
-		<option value="69">PISCO SOUR MEDIA S.A.C.</option>
-		<option value="41">Plaza21</option>
-		<option value="135">PLibros SAC</option>
-		<option value="62">POLOLO GAMING LIMITED</option>
-		<option value="36">PRINTUS S.A.C.</option>
-		<option value="28">Promotora de Turismo Nuevo Mundo S.A.</option>
-		<option value="167">QSOTO E.I.R.L.</option>
-		<option value="129">QUALITY PRODUCTS</option>
-		<option value="16">QUIERESCOMPRA S.A.C.</option>
-		<option value="173">Razon Social Prueba 2</option>
-		<option value="174">Razon Social Prueba 2</option>
-		<option value="175">Razon Social Prueba 3</option>
-		<option value="176">Razon Social Prueba 4</option>
-		<option value="120">RC CORP S.A.C.</option>
-		<option value="15">RED CIENTIFICA PERUANA</option>
-		<option value="133">RIMAC INTERNACIONAL COMPA&#209;IA DE SEGUROS Y REASEGUROS</option>
-		<option value="128">SAGA FALABELLA S. A.</option>
-		<option value="151">SALAS CARHUAVILCA XIMENA HAYDEE</option>
-		<option value="58">SASSY BOX S.A.C.</option>
-		<option value="106">Smart2Pay B.V.</option>
-		<option value="130">SOCIEMPEX SAC</option>
-		<option value="121">SODIMAC PERU S.A.</option>
-		<option value="172">SODIMAC PERU S.A.</option>
-		<option value="124">SOFT ONE CORPORATION SACc</option>
-		<option value="98">SOLUCIONES ITC PERU EIRL</option>
-		<option value="139">SORPRESAS EXPRESS S.A.C.</option>
-		<option value="70">SORPRESAS IMPORT E.I.R.L</option>
-		<option value="83">STAR UP S.A</option>
-		<option value="144">SUMAC HUAYNA LLACTA S.A.C.</option>
-		<option value="166">T&amp;T MEGA REPRESENTACIONES E.I.R.L.</option>
-		<option value="89">TELEFONICA DEL PERU SAA</option>
-		<option value="31">TIGGRES S.A.</option>
-		<option value="88">Townview Trading Limited</option>
-		<option value="165">TRANSPORTE Y LOGISTICA INTELIGENTE S.A.C.</option>
-		<option value="127">Triathlon S.A.C.</option>
-		<option value="91">TURISMO CIVA S.A.C.</option>
-		<option value="27">UGARRIZA MARTINEZ DORIS XAVIERA</option>
-		<option value="146">ULEARN S.A.C</option>
-		<option value="101">UNDERWERE PERU E.I.R.L</option>
-		<option value="112">UNG MIN HWA SOCIEDAD ANONIMA CERRADA - U.M.H. S.A.C.</option>
-		<option value="37">VALE GANGAS S.A.C</option>
-		<option value="104">VENTAS EXPRESS E.I.R.L.</option>
-		<option value="169">VIDEOMAS SAC</option>
-		<option value="21">Viktoys S.A.C.</option>
-		<option value="38">VIP SOUL SAC</option>
-		<option value="73">VIRTUALIA NEGOCIOS S.A.C.</option>
-		<option value="9">VOZT SAC</option>
-		<option value="160">WEB PROFESSIONAL PERU EIRL</option>
-		<option value="142">WORLD BEST PRODUCTS SAC</option>
-		<option value="159">XCHANGE PERU S.A.C</option>
-		<option value="50">YACHAY TELECOMUNICACIONES S.A.C.</option>
-		<option value="143">YOUR ELECTRONIC SUPPLIER S.A.C</option>
-		<option value="22">YOUROUTLET PERU S.A.C.</option>
-		<option value="55">Z M O S.A.C.</option>
+    <script type="text/javascript">
+        function hideModalPopUp() {
+            $("#ctl00_ContentPlaceHolder1_pnlNuevoParametro").hide();
+            return;
+        }
+        function loadEditor(id, idbutton) {
+            if ($('#' + id).length === 0) {
+                return;
+            }
 
-	</select>
-                        <span id="ctl00_ContentPlaceHolder1_rfvEmpresa" style="color:Red;visibility:hidden;">*</span>
-                    </li>
-                    <li class="t1"><span class="color">>></span> Servicio: </li>
-                    <li class="t2">
-                        <select name="ctl00$ContentPlaceHolder1$ddlServicio" id="ctl00_ContentPlaceHolder1_ddlServicio" class="neu" style="float: left">
-		<option selected="selected" value="">::Seleccione::</option>
+            deleteEditor(id);
+            CKEDITOR.replace(id, { fullPage: true });
 
-	</select>
-                        <span id="ctl00_ContentPlaceHolder1_rfvServicio" style="color:Red;visibility:hidden;">*</span>
-                    </li>
-                    <li class="t1"><span class="color">>></span> Moneda: </li>
-                    <li class="t2">
-                        <select name="ctl00$ContentPlaceHolder1$ddlMoneda" onchange="javascript:setTimeout(&#39;__doPostBack(\&#39;ctl00$ContentPlaceHolder1$ddlMoneda\&#39;,\&#39;\&#39;)&#39;, 0)" id="ctl00_ContentPlaceHolder1_ddlMoneda" class="neu" style="float: left">
-		<option selected="selected" value="">::Seleccione::</option>
-		<option value="1">NUEVOS SOLES</option>
-		<option value="2">DOLARES AMERICANOS</option>
-		<option value="3">EUROS</option>
-		<option value="4">FRANCOS SUIZOS</option>
-		<option value="5">PESOS CHILENOS</option>
+            CKEDITOR.instances[id].on('blur', function () {
+                CKEDITOR.instances[id].updateElement();
+            });
+        }
 
-	</select>
-                        <span id="ctl00_ContentPlaceHolder1_rfvIdMoneda" style="color:Red;visibility:hidden;">*</span>
-                    </li>
-                    <li class="t1"><span class="color">>></span> Variaci&oacute;n: </li>
-                    <li class="t2">
-                        <select name="ctl00$ContentPlaceHolder1$ddlTipoVariacion" id="ctl00_ContentPlaceHolder1_ddlTipoVariacion" class="neu" style="float: left">
-		<option value="st">Standar</option>
-		<option value="en">Ingles</option>
-		<option value="fr">Frances</option>
+        function deleteEditor(id) {
+            var instance = CKEDITOR.instances[id];
+            if (instance) {
+                CKEDITOR.remove(instance);
+            }
+        }
+    </script>
 
-	</select>
-                    </li>
-                    <li class="t1"><span class="color">>></span> Tipo de Plantilla: </li>
-                    <li class="t2">
-                        <select name="ctl00$ContentPlaceHolder1$ddlTipoPlantilla" id="ctl00_ContentPlaceHolder1_ddlTipoPlantilla" class="neu" style="float: left">
-		<option selected="selected" value="">::Seleccione::</option>
-
-	</select>
-                        <span id="ctl00_ContentPlaceHolder1_rfvTipoPlantilla" style="color:Red;visibility:hidden;">*</span>
-                    </li>
-                    <li class="t1"><span class="color">>></span> Descripci&oacute;n: </li>
-                    <li class="t2">
-                        <input name="ctl00$ContentPlaceHolder1$txtPlantillaDesc" type="text" readonly="readonly" id="ctl00_ContentPlaceHolder1_txtPlantillaDesc" class="normal" />
-                    </li>                    
-                    <li class="complet" style="height: auto">
-                        <span id="ctl00_ContentPlaceHolder1_lblMsjEstructuraHTML" style="width: 100%; height: auto; clear: both"></span>
-                        <input type="submit" name="ctl00$ContentPlaceHolder1$btnBuscar" value="Buscar" onclick="javascript:WebForm_DoPostBackWithOptions(new WebForm_PostBackOptions(&quot;ctl00$ContentPlaceHolder1$btnBuscar&quot;, &quot;&quot;, true, &quot;ValidaCampos&quot;, &quot;&quot;, false, false))" id="ctl00_ContentPlaceHolder1_btnBuscar" class="input_azul3" />
-                        <input type="submit" name="ctl00$ContentPlaceHolder1$btnLimpiar" value="Limpiar" id="ctl00_ContentPlaceHolder1_btnLimpiar" class="input_azul4" />
-                    </li>
-                </ul>
-                <div id="ctl00_ContentPlaceHolder1_ValidationSummary1" style="color:Red;padding-left:200px;display:none;">
-
-	</div>
-            
-</div>
-        <div style="clear: both">
+    <div class="summernote-editor">
+        <h2>Actualizar Plantilla</h2>
+        <div class="conten_pasos3" style="min-height: 300px">
+            <h4> Datos del Servicio</h4>
+            <div id="ctl00_ContentPlaceHolder1_upFiltros">
+            <input type="hidden" name="ctl00$ContentPlaceHolder1$hdfIdPlantilla" id="ctl00_ContentPlaceHolder1_hdfIdPlantilla" />
+            <ul class="datos_cip2">
+                <li class="t1"><span class="color">>></span> Empresa: </li>
+                <li class="t2">
+                    <select name="ctl00$ContentPlaceHolder1$ddlEmpresa" onchange="javascript:setTimeout(&#39;__doPostBack(\&#39;ctl00$ContentPlaceHolder1$ddlEmpresa\&#39;,\&#39;\&#39;)&#39;, 0)" id="ctl00_ContentPlaceHolder1_ddlEmpresa" class="neu" style="float: left">
+            <option selected="selected" value="">::Seleccione::</option>
+            <option value="152">365 OUTLET PERU SAC</option>
+            <option value="44">3B MARKETING GESTION EMPRESARIAL S.A.C.</option>
+            <option value="157">ADMINISTRADORA DE NEGOCIOS DE TRANSPORTE SAC</option>
+            <option value="39">ALAMESA SERVICE SRL</option>
+            <option value="30">Aldo Espino Servicios Medicos S.Civil de R. L.</option>
+            <option value="79">ALMAT PERU S.A.C.</option>
+            <option value="46">ANDALUNA S.A.C</option>
+            <option value="140">ARGENTARIA S.A.C.</option>
+            <option value="40">ARTE MANIFIESTO SAC</option>
+            <option value="156">Arturo Christian Wong Poggi</option>
+            <option value="102">ASOCIACION EDITORIAL BRU&#209;O</option>
+            <option value="76">AUDIOPHILE S.A.C.</option>
+            <option value="3">AUTOSEL SRLTDA</option>
+            <option value="29">B-PAGO S.A.C</option>
+            <option value="149">BIGBOX PERU S.A.C.</option>
+            <option value="82">BoaCompra S.A</option>
+            <option value="115">BOSTON SERVICIOS MEDICOS SOCIEDAD ANONIMA CERRADA</option>
+            <option value="114">C&#193;MARA DE COMERCIO LIMA</option>
+            <option value="24">CAYDEN LIMITED</option>
+            <option value="125">Cero 51 SAC</option>
+            <option value="126">Cero 51 SAC</option>
+            <option value="136">Claudia Lorena Rolandi Serrano</option>
+            <option value="8">Club del Vino</option>
+            <option value="49">COCONA PERU S.A.C.</option>
+            <option value="81">COMERCIAL BSB PER&#218; S.A.</option>
+            <option value="17">COMERCIAL MONT S.A.C</option>
+            <option value="119">COMERCIALIZADORA DE NATURALEZA Y SALUD S.A.C</option>
+            <option value="25">COMERCIALIZADORA LATINOAMERICANA DE LIBROS ELECTRONICOS S.A.C. - COLALE S.A.C.</option>
+            <option value="12">Comercio Electr&#243;nico Per&#250; SAC</option>
+            <option value="33">COMEXA COMERCIALIZADORA EXTRANJERA S.A. SUCURSAL DEL PERU</option>
+            <option value="158">Compa&#241;&#237;a Peruana de E-commerce</option>
+            <option value="60">Computer Shop On Line S.A.C.</option>
+            <option value="141">CONFETTI CELEBRACIONES SOCIEDAD ANONIMA CERRADA</option>
+            <option value="147">COSME IVAN CHOQUE QUISPE</option>
+            <option value="19">COSTAMAR TRAVEL CRUISE &amp; TOURS S.A.C.</option>
+            <option value="134">CREATIVE SOLUTIONS DEL PERU S.A.C</option>
+            <option value="109">CUPONATIC PERU S.A.C.</option>
+            <option value="13">CUPONIDAD PERU S.A.C.</option>
+            <option value="97">DATING LATAM S.A.C.</option>
+            <option value="99">DOMIREPS S.A.C</option>
+            <option value="96">DOMIRUTH TRAVEL SERVICE S.A.C</option>
+            <option value="110">DOTWORKERS PERU S.A.C.</option>
+            <option value="34">DUHEM S.A.C</option>
+            <option value="54">DyS GLOBAL INVESTMENTS</option>
+            <option value="154">EBANX PERU S.A.C.</option>
+            <option value="66">EDITORIAL DIGITAL DEL PERU S.A.C.</option>
+            <option value="90">EH DATA S.A.C.</option>
+            <option value="122">Eleven Gorillas SRL</option>
+            <option value="107">EMPRESA A</option>
+            <option value="92">EMPRESA DE TRANSPORTE TURISTICO OLANO S.A.</option>
+            <option value="74">EMPRESA DIGITAL PERUANA S.A.C.</option>
+            <option value="1">Empresa Editora El Comercio S.A.</option>
+            <option value="67">Empresa Editora El Comercio S.A. - Kotear</option>
+            <option value="84">Empresa Editora El Comercio S.A. - Urbania_Neoauto</option>
+            <option value="68">Empresa Editora El Comercio S.A.-PeruRed</option>
+            <option value="137">EMUNAH TRAVEL PERU SAC</option>
+            <option value="71">ENOVEDDA S.A.C.</option>
+            <option value="77">ESCUELA DE NEGOCIOS BRACE S.A.C.</option>
+            <option value="164">ESTADO DEL ARTE SAC</option>
+            <option value="145">ESTAMPA LO QUE QUIERAS.COM E.I.R.L</option>
+            <option value="35">Estereofonica</option>
+            <option value="153">FERREHATUN E.I.R.L.</option>
+            <option value="111">GABED S.A.C</option>
+            <option value="118">Gabriela Cortez Villafuerte</option>
+            <option value="116">GIFT HUNTER S.A.C.</option>
+            <option value="132">GOLDEN DESING SAC</option>
+            <option value="86">GONZALES CORNEJO JUAN ALEXANDER</option>
+            <option value="162">GRUPO AMERICANO DE COMERCIO SOCIEDAD ANONIMA CERRADA GRAMECO S.A.C.</option>
+            <option value="14">GRUPO COMERCIALIZADOR DE FLORES S.A.C.</option>
+            <option value="93">GRUPO CYGNUS S.A.C.</option>
+            <option value="105">Grupo Deltron S.A.</option>
+            <option value="148">GRUPO GEARD SAS</option>
+            <option value="170">grupo ripley sac</option>
+            <option value="72">GRUPO SMART TEC S.A.C</option>
+            <option value="80">GULA FOODS SAC</option>
+            <option value="161">GUTIERREZ GAMIO JORGE EDUARDO</option>
+            <option value="163">HAWKERS AMERICAS SAC</option>
+            <option value="100">INSTITUTO DE EDUCACION SUPERIOR TECNOLOGICO PRIVADO PERUANO ALEMAN SAC</option>
+            <option value="85">INTRALOT DE PERU SAC</option>
+            <option value="108">INVERSIONES MENTA S.A.C.</option>
+            <option value="32">KSTORAGE S.R.L.</option>
+            <option value="20">L &amp; L Partners SAC</option>
+            <option value="95">L.C. BUSRE S.A.C.</option>
+            <option value="53">LA CELESTINA S.A.C.</option>
+            <option value="11">LACEF E.I.R.L</option>
+            <option value="57">LAS TRAPERAS S.A.C</option>
+            <option value="155">Latinoam&#233;rica Hosting</option>
+            <option value="113">LAVRU S.A.C</option>
+            <option value="61">LAWGAMERS S.A.C</option>
+            <option value="75">LINIO PERU S.A.C.</option>
+            <option value="64">LUKANA AUCTIONS S.R.L.</option>
+            <option value="7">MAPFRE PERU COMPANIA DE SEGUROS Y REASEGUROS</option>
+            <option value="47">MARBERPRIM S.A.C.</option>
+            <option value="117">MARINA MORA PRODUCTOS E.I.R.L.</option>
+            <option value="150">MAS IDEAS Y SOLUCIONES S.A.C. _MASISOL S.A.C.</option>
+            <option value="78">MCM TIRES S.A.C.</option>
+            <option value="45">MEDIOS DE PAGOS VIRTUALES S.A.C.</option>
+            <option value="43">Melina Victoria Cayo Ruiz</option>
+            <option value="48">MI ENFERMERA S.A.C.</option>
+            <option value="94">MI LUCA SI VALE S.A.C.</option>
+            <option value="138">MIPYO MI PROPIO YO TU PSICOLOGIA AMIGA E.I.R.L.</option>
+            <option value="26">MOULD MADE S.A.</option>
+            <option value="171">MUNICIPALIDAD DE BARRANCO</option>
+            <option value="87">NETPAGOS SAC</option>
+            <option value="63">NEURONA S.A.C.</option>
+            <option value="56">NEWSAT LATIN S.A.C.</option>
+            <option value="131">NICSMEDIA SAC</option>
+            <option value="59">Nubelo Solutions S.L</option>
+            <option value="10">OFERTOP S.A.C. - IQUIERO</option>
+            <option value="18">OFERTOP S.A.C. - OFERTOP</option>
+            <option value="52">OFERTOP S.A.C. - OFERTOP 3</option>
+            <option value="4">OFERTOP S.A.C. - PLAZATOP</option>
+            <option value="103">OFERTOP S.A.C. - SUPERCUPON</option>
+            <option value="51">OFERTOP S.A.C. - TIENDA CLUB</option>
+            <option value="168">ONLINE.PE SAC</option>
+            <option value="123">OPTIMAX SRL</option>
+            <option value="2">ORBIS VENTURES SAC</option>
+            <option value="23">Oveja Negra</option>
+            <option value="6">PayCash S.A.C</option>
+            <option value="42">PERUVIAN AIR LINE S.A.</option>
+            <option value="65">PERUVIAN NET E.I.R.L.</option>
+            <option value="69">PISCO SOUR MEDIA S.A.C.</option>
+            <option value="41">Plaza21</option>
+            <option value="135">PLibros SAC</option>
+            <option value="62">POLOLO GAMING LIMITED</option>
+            <option value="36">PRINTUS S.A.C.</option>
+            <option value="28">Promotora de Turismo Nuevo Mundo S.A.</option>
+            <option value="167">QSOTO E.I.R.L.</option>
+            <option value="129">QUALITY PRODUCTS</option>
+            <option value="16">QUIERESCOMPRA S.A.C.</option>
+            <option value="173">Razon Social Prueba 2</option>
+            <option value="174">Razon Social Prueba 2</option>
+            <option value="175">Razon Social Prueba 3</option>
+            <option value="176">Razon Social Prueba 4</option>
+            <option value="120">RC CORP S.A.C.</option>
+            <option value="15">RED CIENTIFICA PERUANA</option>
+            <option value="133">RIMAC INTERNACIONAL COMPA&#209;IA DE SEGUROS Y REASEGUROS</option>
+            <option value="128">SAGA FALABELLA S. A.</option>
+            <option value="151">SALAS CARHUAVILCA XIMENA HAYDEE</option>
+            <option value="58">SASSY BOX S.A.C.</option>
+            <option value="106">Smart2Pay B.V.</option>
+            <option value="130">SOCIEMPEX SAC</option>
+            <option value="121">SODIMAC PERU S.A.</option>
+            <option value="172">SODIMAC PERU S.A.</option>
+            <option value="124">SOFT ONE CORPORATION SACc</option>
+            <option value="98">SOLUCIONES ITC PERU EIRL</option>
+            <option value="139">SORPRESAS EXPRESS S.A.C.</option>
+            <option value="70">SORPRESAS IMPORT E.I.R.L</option>
+            <option value="83">STAR UP S.A</option>
+            <option value="144">SUMAC HUAYNA LLACTA S.A.C.</option>
+            <option value="166">T&amp;T MEGA REPRESENTACIONES E.I.R.L.</option>
+            <option value="89">TELEFONICA DEL PERU SAA</option>
+            <option value="31">TIGGRES S.A.</option>
+            <option value="88">Townview Trading Limited</option>
+            <option value="165">TRANSPORTE Y LOGISTICA INTELIGENTE S.A.C.</option>
+            <option value="127">Triathlon S.A.C.</option>
+            <option value="91">TURISMO CIVA S.A.C.</option>
+            <option value="27">UGARRIZA MARTINEZ DORIS XAVIERA</option>
+            <option value="146">ULEARN S.A.C</option>
+            <option value="101">UNDERWERE PERU E.I.R.L</option>
+            <option value="112">UNG MIN HWA SOCIEDAD ANONIMA CERRADA - U.M.H. S.A.C.</option>
+            <option value="37">VALE GANGAS S.A.C</option>
+            <option value="104">VENTAS EXPRESS E.I.R.L.</option>
+            <option value="169">VIDEOMAS SAC</option>
+            <option value="21">Viktoys S.A.C.</option>
+            <option value="38">VIP SOUL SAC</option>
+            <option value="73">VIRTUALIA NEGOCIOS S.A.C.</option>
+            <option value="9">VOZT SAC</option>
+            <option value="160">WEB PROFESSIONAL PERU EIRL</option>
+            <option value="142">WORLD BEST PRODUCTS SAC</option>
+            <option value="159">XCHANGE PERU S.A.C</option>
+            <option value="50">YACHAY TELECOMUNICACIONES S.A.C.</option>
+            <option value="143">YOUR ELECTRONIC SUPPLIER S.A.C</option>
+            <option value="22">YOUROUTLET PERU S.A.C.</option>
+            <option value="55">Z M O S.A.C.</option>
+    
+        </select>
+                            <span id="ctl00_ContentPlaceHolder1_rfvEmpresa" style="color:Red;visibility:hidden;">*</span>
+                        </li>
+                        <li class="t1"><span class="color">>></span> Servicio: </li>
+                        <li class="t2">
+                            <select name="ctl00$ContentPlaceHolder1$ddlServicio" id="ctl00_ContentPlaceHolder1_ddlServicio" class="neu" style="float: left">
+            <option selected="selected" value="">::Seleccione::</option>
+    
+        </select>
+                            <span id="ctl00_ContentPlaceHolder1_rfvServicio" style="color:Red;visibility:hidden;">*</span>
+                        </li>
+                        <li class="t1"><span class="color">>></span> Moneda: </li>
+                        <li class="t2">
+                            <select name="ctl00$ContentPlaceHolder1$ddlMoneda" onchange="javascript:setTimeout(&#39;__doPostBack(\&#39;ctl00$ContentPlaceHolder1$ddlMoneda\&#39;,\&#39;\&#39;)&#39;, 0)" id="ctl00_ContentPlaceHolder1_ddlMoneda" class="neu" style="float: left">
+            <option selected="selected" value="">::Seleccione::</option>
+            <option value="1">NUEVOS SOLES</option>
+            <option value="2">DOLARES AMERICANOS</option>
+            <option value="3">EUROS</option>
+            <option value="4">FRANCOS SUIZOS</option>
+            <option value="5">PESOS CHILENOS</option>
+    
+        </select>
+                            <span id="ctl00_ContentPlaceHolder1_rfvIdMoneda" style="color:Red;visibility:hidden;">*</span>
+                        </li>
+                        <li class="t1"><span class="color">>></span> Variaci&oacute;n: </li>
+                        <li class="t2">
+                            <select name="ctl00$ContentPlaceHolder1$ddlTipoVariacion" id="ctl00_ContentPlaceHolder1_ddlTipoVariacion" class="neu" style="float: left">
+            <option value="st">Standar</option>
+            <option value="en">Ingles</option>
+            <option value="fr">Frances</option>
+    
+        </select>
+                        </li>
+                        <li class="t1"><span class="color">>></span> Tipo de Plantilla: </li>
+                        <li class="t2">
+                            <select name="ctl00$ContentPlaceHolder1$ddlTipoPlantilla" id="ctl00_ContentPlaceHolder1_ddlTipoPlantilla" class="neu" style="float: left">
+            <option selected="selected" value="">::Seleccione::</option>
+    
+        </select>
+                            <span id="ctl00_ContentPlaceHolder1_rfvTipoPlantilla" style="color:Red;visibility:hidden;">*</span>
+                        </li>
+                        <li class="t1"><span class="color">>></span> Descripci&oacute;n: </li>
+                        <li class="t2">
+                            <input name="ctl00$ContentPlaceHolder1$txtPlantillaDesc" type="text" readonly="readonly" id="ctl00_ContentPlaceHolder1_txtPlantillaDesc" class="normal" />
+                        </li>                    
+                        <li class="complet" style="height: auto">
+                            <span id="ctl00_ContentPlaceHolder1_lblMsjEstructuraHTML" style="width: 100%; height: auto; clear: both"></span>
+                            <input type="submit" name="ctl00$ContentPlaceHolder1$btnBuscar" value="Buscar" onclick="javascript:WebForm_DoPostBackWithOptions(new WebForm_PostBackOptions(&quot;ctl00$ContentPlaceHolder1$btnBuscar&quot;, &quot;&quot;, true, &quot;ValidaCampos&quot;, &quot;&quot;, false, false))" id="ctl00_ContentPlaceHolder1_btnBuscar" class="input_azul3" />
+                            <input type="submit" name="ctl00$ContentPlaceHolder1$btnLimpiar" value="Limpiar" id="ctl00_ContentPlaceHolder1_btnLimpiar" class="input_azul4" />
+                        </li>
+                    </ul>
+                    <div id="ctl00_ContentPlaceHolder1_ValidationSummary1" style="color:Red;padding-left:200px;display:none;">
+    
+        </div>
+                
+    </div>
+            <div style="clear: both">
+            </div>
+        </div>
+        <div>
+                <div class="container">
+                  <!-- <h4> <i class="note-icon-summernote"></i> Summernote
+                    <span class="label label-info">Bootstrap v3.3.7</span>
+                    <span class="label label-success">with Summernote Icons</span>
+                  </h4> -->
+                  <div class="summernote"><p>Hello World</p></div>
+                </div>
         </div>
     </div>
+
     <div id="ctl00_ContentPlaceHolder1_upEsctructuraHTML">
 	
             
@@ -411,6 +525,7 @@
 			<option value="40">Celular</option>
 			<option value="41">DatoAdicional</option>
 			<option value="42">Direccion Usuario</option>
+
 		</select>
                             <li class="t1"><span class="color">>></span> C&oacute;digo:</li>
                             <li class="t2">
@@ -445,6 +560,7 @@
                         <input type="submit" name="ctl00$ContentPlaceHolder1$btnCancelar" value="Cancelar" onclick="hideModalPopUp();" id="ctl00_ContentPlaceHolder1_btnCancelar" class="input_azul4" />
                     </li>
                 </ul>
+            
 	</div>
         
 </div>
@@ -556,13 +672,7 @@ document.getElementById('ctl00_ContentPlaceHolder1_rfvTipoPlantilla').dispose = 
 }
 //]]>
 </script>
-<div class="container">
-  <h4> <i class="note-icon-summernote"></i> Summernote
-    <span class="label label-info">Bootstrap v3.3.7</span>
-    <span class="label label-success">with Summernote Icons</span>
-  </h4>
-  <div class="summernote"><p>Hello World</p></div>
-</div>
+
 </form>
     <script src="http://dev.2b.pagoEfectivo.pe/App_Themes/SPE/js/jquery.cookie.js?v=201404251012" type="text/javascript"></script>
     <script src="http://dev.2b.pagoEfectivo.pe/App_Themes/SPE/js/jquery.treeview.js?v=201404251012" type="text/javascript"></script>
