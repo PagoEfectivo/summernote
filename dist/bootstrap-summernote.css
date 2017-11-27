@@ -5993,7 +5993,6 @@ button.summernote-editor .close {
   white-space: normal;
   filter: alpha(opacity=0);
   opacity: 0;
-
   line-break: auto;
 }
 .summernote-editor .tooltip.in {
