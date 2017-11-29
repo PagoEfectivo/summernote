@@ -13,6 +13,7 @@
 <script type="text/javascript" src="http://dev.2b.pagoEfectivo.pe/JScripts/jsGenerales.js?v=201404251012"></script>
 <script src="http://dev.2b.pagoEfectivo.pe/App_Themes/SPE/js/funciones.js?v=201404251012" type="text/javascript"></script>
 </head>
+    <link rel="stylesheet" href="../dist/bootstrap-summernote.css" />
     <link rel="stylesheet" href="../dist/summernote.css">
     <title>summernote</title>
   
@@ -21,16 +22,6 @@
     <script type="text/javascript" src="../dist/summernote.js"></script>
     <script src="lang/summernote-es-ES.js"></script>
   
-    <script type="text/javascript">
-      $(document).ready(function() {
-        $('.summernote').summernote({
-          height: 500,
-          lang: 'es-ES',
-          tooltip: false,
-          tabsize: 2
-        });
-      });
-    </script>
 <body>
     <script type="text/javascript">
         function isPostBack() { //function to check if page is a postback-ed one
@@ -431,15 +422,7 @@ return true;
             <div style="clear: both">
             </div>
         </div>
-        <section class="summernote-editor">
-            <div class="container">
-                <!-- <h4> <i class="note-icon-summernote"></i> Summernote
-                <span class="label label-info">Bootstrap v3.3.7</span>
-                <span class="label label-success">with Summernote Icons</span>
-                </h4> -->
-                <div class="summernote"></div>
-            </div>
-        </section>
+        <iframe src="./editor-frame.html" width="100%" height="600"></iframe>
     </div>
 
 
